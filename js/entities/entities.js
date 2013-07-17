@@ -3,11 +3,7 @@ a player entity
 -------------------------------- */
 game.PlayerEntity = me.ObjectEntity.extend({
  
-    /* -----
- 
-    constructor
- 
-    ------ */
+    /* -----constructor------ */
  
     init: function(x, y, settings) {
         // call the constructor
@@ -21,13 +17,8 @@ game.PlayerEntity = me.ObjectEntity.extend({
  
     },
  
-    /* -----
- 
-    update the player pos
- 
-    ------ */
+    /* -----update the player pos------ */
     update: function() {
- 
         if (me.input.isKeyPressed('left')) {
             // flip the sprite on horizontal axis
             //this.flipX(true);
@@ -45,10 +36,30 @@ game.PlayerEntity = me.ObjectEntity.extend({
         } else {
             this.vel.x = 0;
             this.vel.y = 0;
-        }
- 
+        }   
+
         // check & update player movement
         this.updateMovement();
+
+        var res = me.game.collide(this);
+ 
+        if (res) {
+            // if we collide with an enemy
+            if (res.obj.type == me.game.ENEMY_OBJECT) {
+                // check if we jumped on it
+                if ((res.y > 0) && ! this.jumping) {
+                    // bounce (force jump)
+                    this.falling = false;
+                    this.vel.y = -this.maxVel.y * me.timer.tick;
+                    // set the jumping flag
+                    this.jumping = true;
+     
+                } else {
+                    // let's flicker in case we touched an enemy
+                    this.renderable.flicker(45);
+                }
+            }
+        }
  
         // update animation if necessary
         if (this.vel.x!=0 || this.vel.y!=0) {
@@ -62,4 +73,220 @@ game.PlayerEntity = me.ObjectEntity.extend({
         return false;
     }
  
+});
+
+/* --------------------------
+Enemy Entity
+------------------------ */
+game.ZombieEntity = me.ObjectEntity.extend({
+    init: function(x, y, settings) {
+        // define this here instead of tiled
+        settings.image = "zombie";
+        settings.spritewidth = 64;
+ 
+        // call the parent constructor
+        this.parent(x, y, settings);
+ 
+        this.startX = x;
+        this.endX = x + settings.width - settings.spritewidth;
+        // size of sprite
+ 
+        // make him start from the right
+        this.pos.x = x + settings.width - settings.spritewidth;
+        this.walkLeft = true;
+ 
+        // walking & jumping speed
+        this.setVelocity(1, 1);
+ 
+        // make it collidable
+        this.collidable = true;
+        // make it a enemy object
+        this.type = me.game.ENEMY_OBJECT;
+ 
+    },
+ 
+    // call by the engine when colliding with another object
+    // obj parameter corresponds to the other object (typically the player) touching this one
+    onCollision: function(res, obj) {
+ 
+        // res.y >0 means touched by something on the bottom
+        // which mean at top position for this one
+        if (this.alive && (res.y > 0) && obj.falling) {
+            this.renderable.flicker(45);
+        }
+    },
+ 
+    // manage the enemy movement
+    update: function() {
+        // do nothing if not in viewport
+        if (!this.inViewport)
+            return false;
+ 
+        if (this.alive) {
+            if (this.walkLeft && this.pos.x <= this.startX) {
+                this.walkLeft = false;
+            } else if (!this.walkLeft && this.pos.x >= this.endX) {
+                this.walkLeft = true;
+            }
+            // make it walk
+            this.flipX(this.walkLeft);
+            this.vel.x += (this.walkLeft) ? -this.accel.x * me.timer.tick : this.accel.x * me.timer.tick;
+                 
+        } else {
+            this.vel.x = 0;
+        }
+         
+        // check and update movement
+        this.updateMovement();
+         
+        // update animation if necessary
+        if (this.vel.x!=0 || this.vel.y!=0) {
+            // update object animation
+            this.parent();
+            return true;
+        }
+        return false;
+    }
+});
+
+game.WerewolfEntity = me.ObjectEntity.extend({
+    init: function(x, y, settings) {
+        // define this here instead of tiled
+        settings.image = "werewolf";
+        settings.spritewidth = 64;
+ 
+        // call the parent constructor
+        this.parent(x, y, settings);
+ 
+        this.startX = x;
+        //this.endX = x + settings.width - settings.spritewidth;
+        // size of sprite
+ 
+        // make him start from the right
+        //this.pos.x = x + settings.width - settings.spritewidth;
+        //this.walkLeft = true;
+ 
+        // walking & jumping speed
+        this.setVelocity(1, 1);
+ 
+        // make it collidable
+        this.collidable = true;
+        // make it a enemy object
+        this.type = me.game.ENEMY_OBJECT;
+ 
+    },
+ 
+    // call by the engine when colliding with another object
+    // obj parameter corresponds to the other object (typically the player) touching this one
+    onCollision: function(res, obj) {
+ 
+        // res.y >0 means touched by something on the bottom
+        // which mean at top position for this one
+        if (this.alive && (res.y > 0) && obj.falling) {
+            this.renderable.flicker(45);
+        }
+    },
+ 
+    // manage the enemy movement
+    update: function() {
+        // do nothing if not in viewport
+        if (!this.inViewport)
+            return false;
+ 
+        if (this.alive) {
+            if (this.walkLeft && this.pos.x <= this.startX) {
+                this.walkLeft = false;
+            } else if (!this.walkLeft && this.pos.x >= this.endX) {
+                this.walkLeft = true;
+            }
+            // make it walk
+            //this.flipX(this.walkLeft);
+            //this.vel.x += (this.walkLeft) ? -this.accel.x * me.timer.tick : this.accel.x * me.timer.tick;
+                 
+        } else {
+            this.vel.x = 0;
+        }
+         
+        // check and update movement
+        this.updateMovement();
+         
+        // update animation if necessary
+        if (this.vel.x!=0 || this.vel.y!=0) {
+            // update object animation
+            this.parent();
+            return true;
+        }
+        return false;
+    }
+});
+
+game.VampireEntity = me.ObjectEntity.extend({
+    init: function(x, y, settings) {
+        // define this here instead of tiled
+        settings.image = "vampire";
+        settings.spritewidth = 64;
+ 
+        // call the parent constructor
+        this.parent(x, y, settings);
+ 
+        this.startX = x;
+        //this.endX = x + settings.width - settings.spritewidth;
+        // size of sprite
+ 
+        // make him start from the right
+        //this.pos.x = x + settings.width - settings.spritewidth;
+        //this.walkLeft = true;
+ 
+        // walking & jumping speed
+        this.setVelocity(1, 1);
+ 
+        // make it collidable
+        this.collidable = true;
+        // make it a enemy object
+        this.type = me.game.ENEMY_OBJECT;
+ 
+    },
+ 
+    // call by the engine when colliding with another object
+    // obj parameter corresponds to the other object (typically the player) touching this one
+    onCollision: function(res, obj) {
+ 
+        // res.y >0 means touched by something on the bottom
+        // which mean at top position for this one
+        if (this.alive && (res.y > 0) && obj.falling) {
+            this.renderable.flicker(45);
+        }
+    },
+ 
+    // manage the enemy movement
+    update: function() {
+        // do nothing if not in viewport
+        if (!this.inViewport)
+            return false;
+ 
+        if (this.alive) {
+            if (this.walkLeft && this.pos.x <= this.startX) {
+                this.walkLeft = false;
+            } else if (!this.walkLeft && this.pos.x >= this.endX) {
+                this.walkLeft = true;
+            }
+            // make it walk
+            //this.flipX(this.walkLeft);
+            //this.vel.x += (this.walkLeft) ? -this.accel.x * me.timer.tick : this.accel.x * me.timer.tick;
+                 
+        } else {
+            this.vel.x = 0;
+        }
+         
+        // check and update movement
+        this.updateMovement();
+         
+        // update animation if necessary
+        if (this.vel.x!=0 || this.vel.y!=0) {
+            // update object animation
+            this.parent();
+            return true;
+        }
+        return false;
+    }
 });

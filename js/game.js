@@ -37,12 +37,16 @@ var game = {
         me.state.set(me.state.PLAY, new game.PlayScreen());
         // add our player entity in the entity pool
         me.entityPool.add("mainPlayer", game.PlayerEntity);
+        me.entityPool.add("zombie", game.ZombieEntity);
+        me.entityPool.add("vampire", game.VampireEntity);
+        me.entityPool.add("werewolf", game.WerewolfEntity);
              
         // enable the keyboard
         me.input.bindKey(me.input.KEY.LEFT,  "left");
         me.input.bindKey(me.input.KEY.RIGHT, "right");
         me.input.bindKey(me.input.KEY.UP,    "up");
         me.input.bindKey(me.input.KEY.DOWN,  "down");
+        me.input.bindKey(me.input.KEY.X,     "attack", true);
 
         me.sys.gravity = 0;
         // Start the game.

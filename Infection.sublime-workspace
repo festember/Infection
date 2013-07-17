@@ -1,0 +1,436 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"array",
+				"ArrayIndexOutOfBoundsException"
+			],
+			[
+				"first",
+				"firstRun"
+			],
+			[
+				"su",
+				"suspicionLevel"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "js/game.js",
+			"settings":
+			{
+				"buffer_size": 1518,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/resources.js",
+			"settings":
+			{
+				"buffer_size": 357,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/screens/play.js",
+			"settings":
+			{
+				"buffer_size": 298,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/entities/entities.js",
+			"settings":
+			{
+				"buffer_size": 1756,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/screens/title.js",
+			"settings":
+			{
+				"buffer_size": 271,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/Processing/Processing.sublime-build",
+	"command_palette":
+	{
+		"height": 267.0,
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"Code Folding: Fold Tag Attributes"
+			],
+			[
+				"Snippet: ",
+				"Snippet: lights"
+			]
+		],
+		"width": 476.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/Rohan/Downloads/autopatcherv2/auto_patcher",
+		"/Users/Rohan/Documents/CODE/JavaScript/Infection/index.css",
+		"/Users/Rohan/Documents/CODE/JavaScript/Infection/index.html",
+		"/Users/Rohan/Documents/CODE/JavaScript/Infection/js/screens/play.js",
+		"/Users/Rohan/Documents/CODE/JavaScript/Infection/lib/melonJS-0.9.7-min.js",
+		"/Users/Rohan/Documents/CODE/JavaScript/Infection/data/map/area01.tmx",
+		"/Users/Rohan/Desktop/boilerplate-master/js/screens/title.js",
+		"/Users/Rohan/Desktop/boilerplate-master/js/screens/play.js",
+		"/Users/Rohan/Desktop/boilerplate-master/js/entities/entities.js",
+		"/Users/Rohan/Desktop/boilerplate-master/js/game.js",
+		"/Users/Rohan/Desktop/boilerplate-master/js/resources.js",
+		"/Users/Rohan/Desktop/boilerplate-master/index.html",
+		"/Users/Rohan/Desktop/boilerplate-master/index.css",
+		"/Users/Rohan/Downloads/boilerplate-master/js/screens/title.js",
+		"/Users/Rohan/Downloads/boilerplate-master/js/screens/play.js",
+		"/Users/Rohan/Downloads/boilerplate-master/js/resources.js",
+		"/Users/Rohan/Downloads/boilerplate-master/js/game.js",
+		"/Users/Rohan/Downloads/boilerplate-master/js/entities/entities.js",
+		"/Users/Rohan/Downloads/boilerplate-master/README.md",
+		"/Users/Rohan/Documents/CODE/Maps/Infection.tmx",
+		"/Users/Rohan/Desktop/website/index.html",
+		"/Users/Rohan/Desktop/Infection Map/Infection.tmx",
+		"/Users/Rohan/Desktop/website/index.css",
+		"/Users/Rohan/Downloads/anoceanofsky/index.css",
+		"/Users/Rohan/Downloads/anoceanofsky/index.html",
+		"/Users/Rohan/Downloads/TiledMapBuilder-master/package.json",
+		"/Users/Rohan/Desktop/level1.tmx",
+		"/Users/Rohan/test/scripts/scenes/play.js",
+		"/Users/Rohan/test/scripts/utils/level.js",
+		"/Users/Rohan/test/scripts/levels/map.tmx",
+		"/Users/Rohan/test/scripts/scenes/home.js",
+		"/Users/Rohan/test/scripts/init.js",
+		"/Users/Rohan/test/scripts/scenes/load.js",
+		"/Users/Rohan/test/scripts/items/coin.js",
+		"/Users/Rohan/test/scripts/utils/counter.js",
+		"/Users/Rohan/test/scripts/displays/bit.js",
+		"/Users/Rohan/test/scripts/displays/hero.js",
+		"/Users/Rohan/test/scripts/displays/tile.js",
+		"/Users/Rohan/test/scripts/displays/tsprite.js",
+		"/Users/Rohan/test/scripts/items/item.js",
+		"/Users/Rohan/test/scripts/items/spring.js",
+		"/Users/Rohan/test/scripts/levels/level1.tmx",
+		"/Users/Rohan/myGame/build/game.min.js",
+		"/Users/Rohan/myGame/build/play.html",
+		"/Users/Rohan/myGame/assets/aiids.tmx",
+		"/Users/Rohan/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/Rohan/Documents/CODE/JavaScript/F13/aiids.js",
+		"/Users/Rohan/Documents/CODE/JavaScript/F13/map.js",
+		"/Users/Rohan/Documents/CODE/JavaScript/F13/index.html",
+		"/Users/Rohan/Documents/CODE/JavaScript/F13/aiids.json",
+		"/Users/Rohan/myGame/assets/aiids.json",
+		"/Users/Rohan/Documents/CODE/JavaScript/F13/tiledmapbuilder.js",
+		"/Users/Rohan/Documents/CODE/JavaScript/F13/crafty.js",
+		"/Users/Rohan/Desktop/JavaScript/backbonejs.org/index.html",
+		"/Users/Rohan/Desktop/JavaScript/backbonetutorials.com/index.html",
+		"/Users/Rohan/Desktop/addyosmani-todomvc-d41638c/architecture-examples/backbone/js/lib/backbone.localStorage.js",
+		"/Users/Rohan/Desktop/addyosmani-todomvc-d41638c/architecture-examples/backbone/js/collections/todos.js",
+		"/Users/Rohan/Desktop/addyosmani-todomvc-d41638c/architecture-examples/backbone/js/app.js",
+		"/Users/Rohan/Desktop/addyosmani-todomvc-d41638c/assets/base.css",
+		"/Users/Rohan/Desktop/addyosmani-todomvc-d41638c/architecture-examples/backbone/index.html",
+		"/Users/Rohan/Desktop/Welcome-To-Safari/safari.css",
+		"/Users/Rohan/Desktop/Welcome-To-Safari/welcome.html",
+		"/Users/Rohan/Desktop/Welcome-To-Safari/safari.js",
+		"/Users/Rohan/Desktop/Mods/hot_coffee_v2-1/main.scm",
+		"/Developer/Game Engines/cocos2d-iphone-2.0/README.md",
+		"/Users/Rohan/Desktop/Game Engines/JavaScript-HTML5/melonJS-0.9.5.js",
+		"/Users/Rohan/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/Users/Rohan/Library/Application Support/Sublime Text 2/Packages/User/Processing.sublime-settings",
+		"/Users/Rohan/Library/Application Support/Sublime Text 2/Packages/User/JSON.sublime-settings",
+		"/Users/Rohan/Library/Application Support/Sublime Text 2/Packages/User/Distraction Free.sublime-settings",
+		"/Users/Rohan/Documents/CODE/Processing/Money_Laundering_v1/Functions.pde",
+		"/Users/Rohan/Documents/CODE/Processing/Money_Laundering_v1/Money_Laundering_v1.pde",
+		"/Users/Rohan/Documents/CODE/Processing/Money_Laundering_v1/GlobalVariables.pde",
+		"/Users/Rohan/Documents/CODE/Processing/Money_Laundering_v1/Setup.pde",
+		"/Users/Rohan/Documents/CODE/Processing/Money_Laundering_v1/Draw.pde",
+		"/Users/Rohan/Documents/CODE/Processing/Money_Laundering_v1/CustomClasses.pde",
+		"/Users/Rohan/Documents/CODE/Processing/Money_Laundering_v1/.gitignore",
+		"/Users/Rohan/Desktop/MoneyLaundering.sublime-project",
+		"/Users/Rohan/Documents/CODE/Processing/5th Grade Game/zombie_land_beta/zombie_land_beta.pde",
+		"/Users/Rohan/Documents/CODE/Processing/5th Grade Game/zombie_land_final/zombie_land_final.pde",
+		"/Users/Rohan/Documents/CODE/Processing/5th Grade Game/zombie_land_final/KeyTyped.pde",
+		"/Users/Rohan/Documents/CODE/Processing/5th Grade Game/zombie_land_final/Loads.pde",
+		"/Users/Rohan/Documents/CODE/Processing/5th Grade Game/zombie_land_final/Setup.pde",
+		"/Users/Rohan/Documents/CODE/Processing/5th Grade Game/zombie_land_final/Variables.pde",
+		"/Users/Rohan/Documents/CODE/Processing/5th Grade Game/zombie_land_final/Booleans.pde",
+		"/Users/Rohan/Documents/CODE/Processing/5th Grade Game/zombie_land_final/Draw.pde",
+		"/Users/Rohan/Documents/CODE/Processing/5th Grade Game/zombie_land_final/Functions.pde"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"’",
+			"'",
+			"canvas",
+			"todoapp",
+			"redire",
+			"redirect",
+			"topsites",
+			"top",
+			"4"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"&#39"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "js/game.js",
+					"settings":
+					{
+						"buffer_size": 1518,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "js/resources.js",
+					"settings":
+					{
+						"buffer_size": 357,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "js/screens/play.js",
+					"settings":
+					{
+						"buffer_size": 298,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "js/entities/entities.js",
+					"settings":
+					{
+						"buffer_size": 1756,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "js/screens/title.js",
+					"settings":
+					{
+						"buffer_size": 271,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 159.0
+	},
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 203.0,
+	"status_bar_visible": true
+}
