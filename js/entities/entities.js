@@ -1,6 +1,4 @@
-/*------------------- 
-a player entity
--------------------------------- */
+/*-------------------Player Entity-------------------------------- */
 game.PlayerEntity = me.ObjectEntity.extend({
  
     /* -----constructor------ */
@@ -46,17 +44,9 @@ game.PlayerEntity = me.ObjectEntity.extend({
         if (res) {
             // if we collide with an enemy
             if (res.obj.type == me.game.ENEMY_OBJECT) {
-                // check if we jumped on it
-                if ((res.y > 0) && ! this.jumping) {
-                    // bounce (force jump)
-                    this.falling = false;
-                    this.vel.y = -this.maxVel.y * me.timer.tick;
-                    // set the jumping flag
-                    this.jumping = true;
-     
-                } else {
-                    // let's flicker in case we touched an enemy
-                    this.renderable.flicker(45);
+                this.renderable.flicker(45);
+                if(me.input.isKeyPressed('attack')) {
+                    me.game.HUD.updateItemValue("score", 250);
                 }
             }
         }
@@ -75,9 +65,7 @@ game.PlayerEntity = me.ObjectEntity.extend({
  
 });
 
-/* --------------------------
-Zombie Entity
------------------------- */
+/* --------------------------Zombie Entity------------------------ */
 game.ZombieEntity = me.ObjectEntity.extend({
     init: function(x, y, settings) {
         // define this here instead of tiled
@@ -111,8 +99,13 @@ game.ZombieEntity = me.ObjectEntity.extend({
  
         // res.y >0 means touched by something on the bottom
         // which mean at top position for this one
-        if (this.alive && (res.y > 0) && obj.falling) {
-            this.renderable.flicker(45);
+        if (this.alive) {
+            if(me.input.isKeyPressed('attack')) {
+                me.game.HUD.updateItemValue("score", 250);
+                this.renderable.flicker(45);
+                this.collidable = false;
+                me.game.remove(this);
+            }
         }
     },
  
@@ -150,9 +143,7 @@ game.ZombieEntity = me.ObjectEntity.extend({
 });
 
 
-/* --------------------------
-Werewolf Entity
------------------------- */
+/* --------------------------Werewolf Entity------------------------ */
 game.WerewolfEntity = me.ObjectEntity.extend({
     init: function(x, y, settings) {
         // define this here instead of tiled
@@ -188,6 +179,9 @@ game.WerewolfEntity = me.ObjectEntity.extend({
         // which mean at top position for this one
         if (this.alive && (res.y > 0) && obj.falling) {
             this.renderable.flicker(45);
+            me.game.HUD.updateItemValue("score", 250);
+            this.collidable = false;
+            me.game.remove(this);
         }
     },
  
@@ -225,9 +219,7 @@ game.WerewolfEntity = me.ObjectEntity.extend({
 });
 
 
-/* --------------------------
-Vampire Entity
------------------------- */
+/* --------------------------Vampire Entity------------------------ */
 game.VampireEntity = me.ObjectEntity.extend({
     init: function(x, y, settings) {
         // define this here instead of tiled
