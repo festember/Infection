@@ -76,7 +76,7 @@ game.PlayerEntity = me.ObjectEntity.extend({
 });
 
 /* --------------------------
-Enemy Entity
+Zombie Entity
 ------------------------ */
 game.ZombieEntity = me.ObjectEntity.extend({
     init: function(x, y, settings) {
@@ -149,6 +149,10 @@ game.ZombieEntity = me.ObjectEntity.extend({
     }
 });
 
+
+/* --------------------------
+Werewolf Entity
+------------------------ */
 game.WerewolfEntity = me.ObjectEntity.extend({
     init: function(x, y, settings) {
         // define this here instead of tiled
@@ -159,12 +163,12 @@ game.WerewolfEntity = me.ObjectEntity.extend({
         this.parent(x, y, settings);
  
         this.startX = x;
-        //this.endX = x + settings.width - settings.spritewidth;
+        this.endX = x + settings.width - settings.spritewidth;
         // size of sprite
  
         // make him start from the right
-        //this.pos.x = x + settings.width - settings.spritewidth;
-        //this.walkLeft = true;
+        this.pos.x = x + settings.width - settings.spritewidth;
+        this.walkLeft = true;
  
         // walking & jumping speed
         this.setVelocity(1, 1);
@@ -200,8 +204,8 @@ game.WerewolfEntity = me.ObjectEntity.extend({
                 this.walkLeft = true;
             }
             // make it walk
-            //this.flipX(this.walkLeft);
-            //this.vel.x += (this.walkLeft) ? -this.accel.x * me.timer.tick : this.accel.x * me.timer.tick;
+            this.flipX(this.walkLeft);
+            this.vel.x += (this.walkLeft) ? -this.accel.x * me.timer.tick : this.accel.x * me.timer.tick;
                  
         } else {
             this.vel.x = 0;
@@ -220,6 +224,10 @@ game.WerewolfEntity = me.ObjectEntity.extend({
     }
 });
 
+
+/* --------------------------
+Vampire Entity
+------------------------ */
 game.VampireEntity = me.ObjectEntity.extend({
     init: function(x, y, settings) {
         // define this here instead of tiled
@@ -230,12 +238,12 @@ game.VampireEntity = me.ObjectEntity.extend({
         this.parent(x, y, settings);
  
         this.startX = x;
-        //this.endX = x + settings.width - settings.spritewidth;
+        this.endX = x + settings.width - settings.spritewidth;
         // size of sprite
  
         // make him start from the right
-        //this.pos.x = x + settings.width - settings.spritewidth;
-        //this.walkLeft = true;
+        this.pos.x = x + settings.width - settings.spritewidth;
+        this.walkLeft = true;
  
         // walking & jumping speed
         this.setVelocity(1, 1);
@@ -271,8 +279,8 @@ game.VampireEntity = me.ObjectEntity.extend({
                 this.walkLeft = true;
             }
             // make it walk
-            //this.flipX(this.walkLeft);
-            //this.vel.x += (this.walkLeft) ? -this.accel.x * me.timer.tick : this.accel.x * me.timer.tick;
+            this.flipX(this.walkLeft);
+            this.vel.x += (this.walkLeft) ? -this.accel.x * me.timer.tick : this.accel.x * me.timer.tick;
                  
         } else {
             this.vel.x = 0;

@@ -68,6 +68,13 @@
    </properties>
    <ellipse/>
   </object>
+  <object name="vampire" x="768" y="256" width="384" height="64">
+   <properties>
+    <property name="image" value="vampire"/>
+    <property name="spritewidth" value="64"/>
+   </properties>
+   <ellipse/>
+  </object>
  </objectgroup>
  <layer name="collision" width="50" height="50">
   <data encoding="base64">

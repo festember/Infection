@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"y",
+				"y"
+			],
+			[
 				"array",
 				"ArrayIndexOutOfBoundsException"
 			],
@@ -23,7 +27,7 @@
 			"file": "js/game.js",
 			"settings":
 			{
-				"buffer_size": 1518,
+				"buffer_size": 1754,
 				"line_ending": "Unix"
 			}
 		},
@@ -31,7 +35,7 @@
 			"file": "js/resources.js",
 			"settings":
 			{
-				"buffer_size": 357,
+				"buffer_size": 690,
 				"line_ending": "Unix"
 			}
 		},
@@ -47,7 +51,7 @@
 			"file": "js/entities/entities.js",
 			"settings":
 			{
-				"buffer_size": 1756,
+				"buffer_size": 8890,
 				"line_ending": "Unix"
 			}
 		},
@@ -96,12 +100,12 @@
 	},
 	"file_history":
 	[
+		"/Users/Rohan/Documents/CODE/JavaScript/Infection/data/map/area01.tmx",
+		"/Users/Rohan/Documents/CODE/JavaScript/Infection/index.html",
 		"/Users/Rohan/Downloads/autopatcherv2/auto_patcher",
 		"/Users/Rohan/Documents/CODE/JavaScript/Infection/index.css",
-		"/Users/Rohan/Documents/CODE/JavaScript/Infection/index.html",
 		"/Users/Rohan/Documents/CODE/JavaScript/Infection/js/screens/play.js",
 		"/Users/Rohan/Documents/CODE/JavaScript/Infection/lib/melonJS-0.9.7-min.js",
-		"/Users/Rohan/Documents/CODE/JavaScript/Infection/data/map/area01.tmx",
 		"/Users/Rohan/Desktop/boilerplate-master/js/screens/title.js",
 		"/Users/Rohan/Desktop/boilerplate-master/js/screens/play.js",
 		"/Users/Rohan/Desktop/boilerplate-master/js/entities/entities.js",
@@ -235,15 +239,15 @@
 					"file": "js/game.js",
 					"settings":
 					{
-						"buffer_size": 1518,
+						"buffer_size": 1754,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1194,
+								1206
 							]
 						],
 						"settings":
@@ -253,7 +257,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 205.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -263,15 +267,15 @@
 					"file": "js/resources.js",
 					"settings":
 					{
-						"buffer_size": 357,
+						"buffer_size": 690,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								670,
+								670
 							]
 						],
 						"settings":
@@ -318,15 +322,15 @@
 					"file": "js/entities/entities.js",
 					"settings":
 					{
-						"buffer_size": 1756,
+						"buffer_size": 8890,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								7264,
+								7264
 							]
 						],
 						"settings":
@@ -336,7 +340,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 3030.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
