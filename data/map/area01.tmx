@@ -75,6 +75,34 @@
    </properties>
    <ellipse/>
   </object>
+  <object name="zombie" x="448" y="128" width="192" height="64">
+   <properties>
+    <property name="image" value="zombie"/>
+    <property name="spritewidth" value="64"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object name="zombie" x="448" y="512" width="192" height="64">
+   <properties>
+    <property name="image" value="zombie"/>
+    <property name="spritewidth" value="64"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object name="zombie" x="640" y="640" width="192" height="64">
+   <properties>
+    <property name="image" value="zombie"/>
+    <property name="spritewidth" value="64"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object name="zombie" x="128" y="512" width="192" height="64">
+   <properties>
+    <property name="image" value="zombie"/>
+    <property name="spritewidth" value="64"/>
+   </properties>
+   <ellipse/>
+  </object>
  </objectgroup>
  <layer name="collision" width="50" height="50">
   <data encoding="base64">

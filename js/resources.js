@@ -15,5 +15,6 @@ game.resources = [
      */
     {name: "area01", type: "tmx", src: "data/map/area01.tmx"},
     // game font
-    {name: "64x64_font", type: "image", src: "data/img/font/64x64_font.png"}
+    {name: "64x64_font", type: "image", src: "data/img/font/64x64_font.png"},
+    {name: "32x32_font", type: "image", src: "data/img/font/32x32_font.png"}
 ];
