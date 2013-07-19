@@ -1,4 +1,13 @@
 /*-------------------Player Entity-------------------------------- */
+game.persistent = {
+	player: {
+		convertRate: 0,
+		kills: 0,
+	},
+};
+
+
+
 game.PlayerEntity = me.ObjectEntity.extend({
  
     /* -----constructor------ */
@@ -53,12 +62,16 @@ game.PlayerEntity = me.ObjectEntity.extend({
                 //this.Kill+=1;
                 //this.convertRate = (1/1.414)*(1/Math.exp(Math.pow(this.Kill-this.mean,2)/(2*this.deviation)))*10
                 //game.persstent.player.convertRate = this.convertRate;  
+                /*console.log('Hey it collided');
                 if (game.persistent.player.kills <= 80){
                     game.persistent.player.convertRate = (9/8)*game.persistent.player.kills + 1;
+		    console.log(game.persistent.player.convertRate);
+		    console.log(game.persistent.player.kills);
+		    console.log('HEY');
                 }
                 else{
                     game.persistent.player.convertRate = (-0.07*game.persistent.player.kills) + 15.6;
-                }
+                }*/
                 //me.game.HUD.updateItemValue("kill", game.persistent.player.kills);
                 //me.game.HUD.updateItemValue("convRate", game.persistent.player.convertRate);
 
@@ -117,19 +130,32 @@ game.ZombieEntity = me.ObjectEntity.extend({
         // which mean at top position for this one
         if (this.alive) {
             if(me.input.isKeyPressed('attack')) {
-                //me.game.HUD.updateItemValue("health", this.health);
+        	   //me.game.HUD.updateItemValue("health", this.health);
                 //me.game.HUD.updateItemValue("score", 250);
-                this.renderable.flicker(45);
-                this.collidable = false;
                 //me.game.remove(this);
                 //this.alive = false;
-                //this.health-=(10*game.persistent.player.convertRate);
+                console.log('Hey it collided');
+                if (game.persistent.player.kills <= 80){
+                    game.persistent.player.convertRate = (9/80)*game.persistent.player.kills + 1;
+		    console.log('conv rate:' + game.persistent.player.convertRate);
+		    console.log('kills :' +game.persistent.player.kills);
+		    console.log('HEY');
+                }
+                else{
+                    game.persistent.player.convertRate = (-0.07*game.persistent.player.kills) + 15.6;
+                }
+                console.log(game.persistent.player.convertRate);
+		console.log(this.health);
+                this.health-=(3*game.persistent.player.convertRate);
                 //me.game.HUD.updateItemValue("health", this.health);
-                /*if(this.health <=0){
+                if(this.health <=0){
                     //me.game.remove(this);
-                    this.alive = false;
-                    //game.persistent.kills+=1;
-                }*/
+                	this.renderable.flicker(45);
+               		 this.collidable = false;
+                	 this.alive = false;
+                         game.persistent.player.kills+=1;
+			console.log('KILLED ')
+                }
             }
         }
     },
@@ -205,10 +231,26 @@ game.WerewolfEntity = me.ObjectEntity.extend({
         if (this.alive) {
             if(me.input.isKeyPressed('attack')) {
                 me.game.HUD.updateItemValue("score", 250);
-                this.renderable.flicker(45);
-                this.collidable = false;
+		console.log('Hey it collided');
+                if (game.persistent.player.kills <= 80){
+                    game.persistent.player.convertRate = (9/8)*game.persistent.player.kills + 1;
+                    console.log('convert rate:'+ game.persistent.player.convertRate);
+                    console.log('KILLS: '+game.persistent.player.kills);
+		
+                    console.log('HEY');
+                }
+                else{
+                    game.persistent.player.convertRate = (-0.07*game.persistent.player.kills) + 15.6;
+                }
+                console.log(game.persistent.player.convertRate);
+                console.log(this.health);
+                this.health-=(game.persistent.player.convertRate);
+		if(this.health<=0){
+                	this.renderable.flicker(45);
+                	this.collidable = false;
                 //me.game.remove(this);
-                this.alive = false;
+                	this.alive = false;
+		}
             }
         }
     },
