@@ -12,6 +12,11 @@ game.PlayerEntity = me.ObjectEntity.extend({
  
         // set the display to follow our position on both axis
         me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
+
+        //this.Kill = 0;
+        this.convertRate=0; 
+        this.deviation = 850;
+        this.mean = 80;
  
     },
  
@@ -45,6 +50,18 @@ game.PlayerEntity = me.ObjectEntity.extend({
             // if we collide with an enemy
             if (res.obj.type == me.game.ENEMY_OBJECT && me.input.isKeyPressed('attack')) {
                 this.renderable.flicker(45);
+                //this.Kill+=1;
+                //this.convertRate = (1/1.414)*(1/Math.exp(Math.pow(this.Kill-this.mean,2)/(2*this.deviation)))*10
+                //game.persstent.player.convertRate = this.convertRate;  
+                if (game.persistent.player.kills <= 80){
+                    game.persistent.player.convertRate = (9/8)*game.persistent.player.kills + 1;
+                }
+                else{
+                    game.persistent.player.convertRate = (-0.07*game.persistent.player.kills) + 15.6;
+                }
+                //me.game.HUD.updateItemValue("kill", game.persistent.player.kills);
+                //me.game.HUD.updateItemValue("convRate", game.persistent.player.convertRate);
+
                 //me.game.HUD.updateItemValue("score", 250);
             }
         }
@@ -88,7 +105,8 @@ game.ZombieEntity = me.ObjectEntity.extend({
         this.collidable = true;
         // make it a enemy object
         this.type = me.game.ENEMY_OBJECT;
- 
+
+        this.health=100;
     },
  
     // call by the engine when colliding with another object
@@ -99,11 +117,19 @@ game.ZombieEntity = me.ObjectEntity.extend({
         // which mean at top position for this one
         if (this.alive) {
             if(me.input.isKeyPressed('attack')) {
-                me.game.HUD.updateItemValue("score", 250);
+                //me.game.HUD.updateItemValue("health", this.health);
+                //me.game.HUD.updateItemValue("score", 250);
                 this.renderable.flicker(45);
                 this.collidable = false;
                 //me.game.remove(this);
-                this.alive = false;
+                //this.alive = false;
+                //this.health-=(10*game.persistent.player.convertRate);
+                //me.game.HUD.updateItemValue("health", this.health);
+                /*if(this.health <=0){
+                    //me.game.remove(this);
+                    this.alive = false;
+                    //game.persistent.kills+=1;
+                }*/
             }
         }
     },
