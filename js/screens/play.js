@@ -4,7 +4,7 @@ game.PlayScreen = me.ScreenObject.extend({
 	 */
 	onResetEvent: function() {	
 		//get the base map level
-    	me.levelDirector.loadLevel("area01");
+    	me.levelDirector.loadLevel("main");
      	// add a default HUD to the game mngr
 		me.game.addHUD(0, 440, 640, 32);
 		

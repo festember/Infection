@@ -13,7 +13,8 @@ game.resources = [
     /* 
      * Maps. 
      */
-    {name: "area01", type: "tmx", src: "data/map/area01.tmx"},
+    {name: "main", type: "tmx", src: "data/map/main.tmx"},
+    {name: "room1", type: "tmx", src: "data/map/room1.tmx"},
     // game font
     //{name: "64x64_font", type: "image", src: "data/img/font/64x64_font.png"},
     {name: "32x32_font", type: "image", src: "data/img/font/32x32_font.png"}

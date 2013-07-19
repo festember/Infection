@@ -43,11 +43,9 @@ game.PlayerEntity = me.ObjectEntity.extend({
  
         if (res) {
             // if we collide with an enemy
-            if (res.obj.type == me.game.ENEMY_OBJECT) {
+            if (res.obj.type == me.game.ENEMY_OBJECT && me.input.isKeyPressed('attack')) {
                 this.renderable.flicker(45);
-                if(me.input.isKeyPressed('attack')) {
-                    me.game.HUD.updateItemValue("score", 250);
-                }
+                //me.game.HUD.updateItemValue("score", 250);
             }
         }
  
@@ -104,7 +102,8 @@ game.ZombieEntity = me.ObjectEntity.extend({
                 me.game.HUD.updateItemValue("score", 250);
                 this.renderable.flicker(45);
                 this.collidable = false;
-                me.game.remove(this);
+                //me.game.remove(this);
+                this.alive = false;
             }
         }
     },
@@ -177,11 +176,14 @@ game.WerewolfEntity = me.ObjectEntity.extend({
  
         // res.y >0 means touched by something on the bottom
         // which mean at top position for this one
-        if (this.alive && (res.y > 0) && obj.falling) {
-            this.renderable.flicker(45);
-            me.game.HUD.updateItemValue("score", 250);
-            this.collidable = false;
-            me.game.remove(this);
+        if (this.alive) {
+            if(me.input.isKeyPressed('attack')) {
+                me.game.HUD.updateItemValue("score", 250);
+                this.renderable.flicker(45);
+                this.collidable = false;
+                //me.game.remove(this);
+                this.alive = false;
+            }
         }
     },
  
@@ -253,8 +255,15 @@ game.VampireEntity = me.ObjectEntity.extend({
  
         // res.y >0 means touched by something on the bottom
         // which mean at top position for this one
-        if (this.alive && (res.y > 0) && obj.falling) {
-            this.renderable.flicker(45);
+        if (this.alive) {
+            if(me.input.isKeyPressed('attack')) {
+                me.game.HUD.updateItemValue("score", 250);
+                this.renderable.flicker(45);
+                this.collidable = false;
+                //me.game.remove(this);
+                this.alive = false;
+                //this.settings.image = obj.image;
+            }
         }
     },
  
@@ -301,11 +310,7 @@ game.ScoreObject = me.HUD_Item.extend({
         this.font.set("right");
     },
  
-    /* -----
- 
-    draw our score
- 
-    ------ */
+    /* -----draw our score------ */
     draw: function(context, x, y) {
         this.font.draw(context, this.value, this.pos.x + x, this.pos.y + y);
     }
