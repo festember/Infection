@@ -3,7 +3,10 @@ game.persistent = {
 	player: {
 		convertRate: 0,
 		kills: 0,
-	},
+		targetx :0,
+		targety :0,
+		
+		},
 };
 
 
@@ -57,7 +60,9 @@ game.PlayerEntity = me.ObjectEntity.extend({
  
         if (res) {
             // if we collide with an enemy
-            if (res.obj.type == me.game.ENEMY_OBJECT && me.input.isKeyPressed('attack')) {
+	    game.persistent.player.targetx =this.pos.x;
+	    game.persistent.player.targety =this.pos.y;
+	    if (res.obj.type == me.game.ENEMY_OBJECT && me.input.isKeyPressed('attack')) {
                 this.renderable.flicker(45);
                 //this.Kill+=1;
                 //this.convertRate = (1/1.414)*(1/Math.exp(Math.pow(this.Kill-this.mean,2)/(2*this.deviation)))*10
@@ -175,7 +180,35 @@ game.ZombieEntity = me.ObjectEntity.extend({
             // make it walk
             this.flipX(this.walkLeft);
             this.vel.x += (this.walkLeft) ? -this.accel.x * me.timer.tick : this.accel.x * me.timer.tick;
-                 
+	    if (me.input.isKeyPressed('attack')){
+		console.log('Attacking ZOMBIE MOVING ');	
+		this.angle = Math.atan((game.persistent.player.targety-this.pos.y)/(game.persistent.player.targetx-this.pos.x))
+		this.angle = (180/Math.PI)*this.angle;
+		this.vel.x = this.vel.x * Math.cos(this.angle);
+		this.vel.y = this.vel.y * Math.sin(this.angle);
+		console.log(' target x ' + game.persistent.player.targetx + ' this.x ' + this.pos.x);
+		console.log(' target y ' + game.persistent.player.targety + ' this.y ' + this.pos.y);
+		console.log(' angle ' + this.angle);
+		console.log('vel x ' + this.vel.x);
+		console.log('vel y ' + this.vel.y);
+		if(this.pos.x< game.persistent.player.targetx){
+
+			this.vel.x = this.vel.x - this.accel.x*me.timer.tick;
+		}
+		else if(this.pos.x > game.persistent.player.targetx){
+			this.vel.x = this.vel.x + this.accel.x * me.timer.tick;
+		}
+		
+		if(this.pos.y > game.persistent.player.targety){
+			this.vel.y = this.vel.y - this.accel.x * me.timer.tick;
+		}
+		
+		else if(this.pos.y < game.persistent.player.targety){
+			this.vel.y = this.vel.y + this.accel.x * me.timer.tick;
+		}
+		
+	}       
+         
         } else {
             this.vel.x = 0;
         }
