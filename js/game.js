@@ -46,7 +46,7 @@ var game = {
         me.input.bindKey(me.input.KEY.RIGHT, "right");
         me.input.bindKey(me.input.KEY.UP,    "up");
         me.input.bindKey(me.input.KEY.DOWN,  "down");
-        me.input.bindKey(me.input.KEY.X,     "attack", true);
+        me.input.bindKey(me.input.KEY.X,     "attack");
 
         me.sys.gravity = 0;
         // Start the game.
