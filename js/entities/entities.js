@@ -7,6 +7,10 @@ game.persistent = {
 		targety :0,
 		
 		},
+	opponent:{
+		attack : 0,
+		help : 0,
+		},
 };
 
 
@@ -62,8 +66,8 @@ game.PlayerEntity = me.ObjectEntity.extend({
             // if we collide with an enemy
 	    game.persistent.player.targetx =this.pos.x;
 	    game.persistent.player.targety =this.pos.y;
-	    if (res.obj.type == me.game.ENEMY_OBJECT && me.input.isKeyPressed('attack')) {
-                this.renderable.flicker(45);
+	    //if (res.obj.type == me.game.ENEMY_OBJECT && me.input.isKeyPressed('attack')) {
+                //this.renderable.flicker(45);
                 //this.Kill+=1;
                 //this.convertRate = (1/1.414)*(1/Math.exp(Math.pow(this.Kill-this.mean,2)/(2*this.deviation)))*10
                 //game.persstent.player.convertRate = this.convertRate;  
@@ -81,7 +85,7 @@ game.PlayerEntity = me.ObjectEntity.extend({
                 //me.game.HUD.updateItemValue("convRate", game.persistent.player.convertRate);
 
                 //me.game.HUD.updateItemValue("score", 250);
-            }
+            //}
         }
  
         // update animation if necessary
@@ -123,7 +127,7 @@ game.ZombieEntity = me.ObjectEntity.extend({
         this.collidable = true;
         // make it a enemy object
         this.type = me.game.ENEMY_OBJECT;
-
+	this.attack = 1;
         this.health=100;
     },
  
@@ -134,35 +138,44 @@ game.ZombieEntity = me.ObjectEntity.extend({
         // res.y >0 means touched by something on the bottom
         // which mean at top position for this one
         if (this.alive) {
-            if(me.input.isKeyPressed('attack')) {
+		console.log('Collide');	
         	   //me.game.HUD.updateItemValue("health", this.health);
                 //me.game.HUD.updateItemValue("score", 250);
                 //me.game.remove(this);
                 //this.alive = false;
-                console.log('Hey it collided');
-                if (game.persistent.player.kills <= 80){
-                    game.persistent.player.convertRate = (9/80)*game.persistent.player.kills + 1;
-		    console.log('conv rate:' + game.persistent.player.convertRate);
-		    console.log('kills :' +game.persistent.player.kills);
-		    console.log('HEY');
-                }
-                else{
-                    game.persistent.player.convertRate = (-0.07*game.persistent.player.kills) + 15.6;
-                }
-                console.log(game.persistent.player.convertRate);
-		console.log(this.health);
-                this.health-=(3*game.persistent.player.convertRate);
+                game.persistent.opponent.help = 1;
+                if(me.input.isKeyPressed('attack')){
+			game.persistent.opponent.attack = 1;
+			console.log('OPPONENT Help MODE '+ game.persistent.opponent.help);
+                	console.log('Hey it collided');
+                	if (game.persistent.player.kills <= 80){
+                    		game.persistent.player.convertRate = (9/80)*game.persistent.player.kills + 1;
+		    		console.log('conv rate:' + game.persistent.player.convertRate);
+		    		console.log('kills :' +game.persistent.player.kills);
+		   		 console.log('HEY');
+                	}
+                	else{
+                	    game.persistent.player.convertRate = (-0.07*game.persistent.player.kills) + 15.6;
+                	}
+                	console.log(game.persistent.player.convertRate);
+			console.log(this.health);
+                	this.health-=(3*game.persistent.player.convertRate);
                 //me.game.HUD.updateItemValue("health", this.health);
-                if(this.health <=0){
+                	if(this.health <=0){
                     //me.game.remove(this);
-                	this.renderable.flicker(45);
-               		 this.collidable = false;
-                	 this.alive = false;
-                         game.persistent.player.kills+=1;
-			console.log('KILLED ')
+                		this.renderable.flicker(45);
+               			 this.collidable = false;
+                		 this.alive = false;
+                         	game.persistent.player.kills+=1;
+				console.log('KILLED ');
+				game.persistent.opponent.attack = 0;
                 }
+		
             }
-        }
+		//game.persistent.opponent.help = 0;
+		console.log('Help ' + game.persistent.opponent.help);
+	}	
+        
     },
  
     // manage the enemy movement
@@ -180,17 +193,17 @@ game.ZombieEntity = me.ObjectEntity.extend({
             // make it walk
             this.flipX(this.walkLeft);
             this.vel.x += (this.walkLeft) ? -this.accel.x * me.timer.tick : this.accel.x * me.timer.tick;
-	    if (me.input.isKeyPressed('attack')){
+	    if (game.persistent.opponent.help){
 		console.log('Attacking ZOMBIE MOVING ');	
 		this.angle = Math.atan((game.persistent.player.targety-this.pos.y)/(game.persistent.player.targetx-this.pos.x))
 		this.angle = (180/Math.PI)*this.angle;
 		this.vel.x = this.vel.x * Math.cos(this.angle);
 		this.vel.y = this.vel.y * Math.sin(this.angle);
-		console.log(' target x ' + game.persistent.player.targetx + ' this.x ' + this.pos.x);
-		console.log(' target y ' + game.persistent.player.targety + ' this.y ' + this.pos.y);
-		console.log(' angle ' + this.angle);
-		console.log('vel x ' + this.vel.x);
-		console.log('vel y ' + this.vel.y);
+		//console.log(' target x ' + game.persistent.player.targetx + ' this.x ' + this.pos.x);
+		//console.log(' target y ' + game.persistent.player.targety + ' this.y ' + this.pos.y);
+		//console.log(' angle ' + this.angle);
+		//console.log('vel x ' + this.vel.x);
+		//console.log('vel y ' + this.vel.y);
 		if(this.pos.x< game.persistent.player.targetx){
 
 			this.vel.x = this.vel.x - this.accel.x*me.timer.tick;
@@ -206,6 +219,8 @@ game.ZombieEntity = me.ObjectEntity.extend({
 		else if(this.pos.y < game.persistent.player.targety){
 			this.vel.y = this.vel.y + this.accel.x * me.timer.tick;
 		}
+		
+		
 		
 	}       
          
