@@ -35,7 +35,7 @@
 			"file": "js/resources.js",
 			"settings":
 			{
-				"buffer_size": 690,
+				"buffer_size": 827,
 				"line_ending": "Unix"
 			}
 		},
@@ -43,7 +43,7 @@
 			"file": "js/screens/play.js",
 			"settings":
 			{
-				"buffer_size": 298,
+				"buffer_size": 704,
 				"line_ending": "Unix"
 			}
 		},
@@ -51,7 +51,7 @@
 			"file": "js/entities/entities.js",
 			"settings":
 			{
-				"buffer_size": 8890,
+				"buffer_size": 12732,
 				"line_ending": "Unix"
 			}
 		},
@@ -100,6 +100,9 @@
 	},
 	"file_history":
 	[
+		"/Users/Rohan/Documents/CODE/JavaScript/Infection/js/entities/zombie",
+		"/Users/Rohan/Documents/CODE/JavaScript/Infection/js/entities/vampire.js",
+		"/Users/Rohan/Documents/CODE/JavaScript/Infection/js/entities/werewolf.js",
 		"/Users/Rohan/Documents/CODE/JavaScript/Infection/data/map/area01.tmx",
 		"/Users/Rohan/Documents/CODE/JavaScript/Infection/index.html",
 		"/Users/Rohan/Downloads/autopatcherv2/auto_patcher",
@@ -204,6 +207,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"convert_rate",
+			"hud",
+			"area",
+			"attack",
 			"’",
 			"'",
 			"canvas",
@@ -220,6 +227,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"convertRate",
 			"&#39"
 		],
 		"reverse": false,
@@ -246,8 +254,8 @@
 						"selection":
 						[
 							[
-								1194,
-								1206
+								1467,
+								1468
 							]
 						],
 						"settings":
@@ -257,7 +265,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 205.0,
+						"translation.y": 7.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -267,15 +275,15 @@
 					"file": "js/resources.js",
 					"settings":
 					{
-						"buffer_size": 690,
+						"buffer_size": 827,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								670,
-								670
+								825,
+								827
 							]
 						],
 						"settings":
@@ -295,20 +303,21 @@
 					"file": "js/screens/play.js",
 					"settings":
 					{
-						"buffer_size": 298,
+						"buffer_size": 704,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								355,
+								355
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
@@ -322,15 +331,15 @@
 					"file": "js/entities/entities.js",
 					"settings":
 					{
-						"buffer_size": 8890,
+						"buffer_size": 12732,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7264,
-								7264
+								1809,
+								1809
 							]
 						],
 						"settings":
@@ -340,7 +349,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3030.0,
+						"translation.y": 590.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -357,8 +366,8 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								270,
+								270
 							]
 						],
 						"settings":

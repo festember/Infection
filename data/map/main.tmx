@@ -109,6 +109,20 @@
     <property name="to" value="room1"/>
    </properties>
   </object>
+  <object name="zombie" x="640" y="768" width="192" height="64">
+   <properties>
+    <property name="image" value="zombie"/>
+    <property name="spritewidth" value="64"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object name="zombie" x="1280" y="896" width="384" height="64">
+   <properties>
+    <property name="image" value="zombie"/>
+    <property name="spritewidth" value="64"/>
+   </properties>
+   <ellipse/>
+  </object>
  </objectgroup>
  <layer name="collision" width="50" height="50">
   <data encoding="base64">
