@@ -61,7 +61,7 @@ game.PlayerEntity = me.ObjectEntity.extend({
 	    game.persistent.player.targetx =this.pos.x;
 	    game.persistent.player.targety =this.pos.y;
 	    if (res.obj.type == me.game.ENEMY_OBJECT && me.input.isKeyPressed('attack')) {
-                this.renderable.flicker(45);
+                //this.renderable.flicker(45);
                 //this.Kill+=1;
                 //this.convertRate = (1/1.414)*(1/Math.exp(Math.pow(this.Kill-this.mean,2)/(2*this.deviation)))*10
                 //game.persstent.player.convertRate = this.convertRate;  
@@ -131,6 +131,7 @@ game.ConvertedEntity = me.ObjectEntity.extend({
             return false;
  
         if (this.alive) {
+            this.dir = ObjectEntity.angleTo(PlayerEntity);
             if (this.walkLeft && this.pos.x <= this.startX) {
                 this.walkLeft = false;
             } else if (!this.walkLeft && this.pos.x >= this.endX) {
@@ -214,7 +215,8 @@ game.ZombieEntity = me.ObjectEntity.extend({
                 //me.game.HUD.updateItemValue("health", this.health);
                 if(this.health <=0){
                     me.game.remove(this);
-                	this.renderable.flicker(45);
+                	//this.renderable.flicker(45);
+                    me.game.HUD.updateItemValue("score", 250);
                		this.collidable = false;
                 	this.alive = false;
                     game.persistent.player.kills+=1;
@@ -338,7 +340,8 @@ game.WerewolfEntity = me.ObjectEntity.extend({
                 console.log(this.health);
                 this.health-=(game.persistent.player.convertRate);
 		        if(this.health<=0){
-                	this.renderable.flicker(45);
+                	//this.renderable.flicker(45);
+                    me.game.HUD.updateItemValue("score", 250);
                 	this.collidable = false;
                     me.game.remove(this);
                 	this.alive = false;
@@ -418,7 +421,7 @@ game.VampireEntity = me.ObjectEntity.extend({
         if (this.alive) {
             if(me.input.isKeyPressed('attack')) {
                 me.game.HUD.updateItemValue("score", 250);
-                this.renderable.flicker(45);
+                //this.renderable.flicker(45);
                 this.collidable = false;
                 //me.game.remove(this);
                 this.alive = false;
