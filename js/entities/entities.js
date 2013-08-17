@@ -221,19 +221,41 @@ game.ZombieEntity = me.ObjectEntity.extend({
                 	    game.persistent.player.convertRate = (-0.07*game.persistent.player.kills) + 15.6;
                 	}
                 	console.log(game.persistent.player.convertRate);
-			         console.log(this.health);
-                	this.health-=(2*game.persistent.player.convertRate);
+			console.log(this.health);
+                	this.health-=(3*game.persistent.player.convertRate);
                 //me.game.HUD.updateItemValue("health", this.health);
                 	if(this.health <=0){
-                    //me.game.add()
+                    //me.game.remove(this);
                 		//this.renderable.flicker(45);
                			 this.collidable = false;
                 		 this.alive = false;
                          game.persistent.player.kills+=1;
 				        console.log('KILLED ');
 				    game.persistent.opponent.attack = 0;
+                }
+                //console.log('ATTACK');
+                if (game.persistent.player.kills <= 80){
+                    game.persistent.player.convertRate = (9/80)*game.persistent.player.kills + 1;
+		            console.log('conv rate:' + game.persistent.player.convertRate);
+		            console.log('kills :' +game.persistent.player.kills);
+		            //console.log('HEY');
+                } else {
+                    game.persistent.player.convertRate = (-0.07*game.persistent.player.kills) + 15.6;
+                }
+                console.log(game.persistent.player.convertRate);
+		        console.log('HEALTH: ' + this.health);
+                this.health-=(3*game.persistent.player.convertRate);
+                //me.game.HUD.updateItemValue("health", this.health);
+                if(this.health <=0){
                     me.game.remove(this);
-                }		
+                	//this.renderable.flicker(45);
+                    me.game.HUD.updateItemValue("score", 250);
+               		this.collidable = false;
+                	this.alive = false;
+                    game.persistent.player.kills+=1;
+			        console.log('KILLED ')
+                }
+		
             }
 		//game.persistent.opponent.help = 0;
 		console.log('Help ' + game.persistent.opponent.help);
@@ -289,11 +311,11 @@ game.ZombieEntity = me.ObjectEntity.extend({
     		this.angle = (180/Math.PI)*this.angle;
     		this.vel.x = this.vel.x * Math.cos(this.angle);
     		this.vel.y = this.vel.y * Math.sin(this.angle);
-    		//console.log(' target x ' + game.persistent.player.targetx + ' this.x ' + this.pos.x);
-    		//console.log(' target y ' + game.persistent.player.targety + ' this.y ' + this.pos.y);
-    		//console.log(' angle ' + this.angle);
-    		//console.log('vel x ' + this.vel.x);
-    		//console.log('vel y ' + this.vel.y);
+    		console.log(' target x ' + game.persistent.player.targetx + ' this.x ' + this.pos.x);
+    		console.log(' target y ' + game.persistent.player.targety + ' this.y ' + this.pos.y);
+    		console.log(' angle ' + this.angle);
+    		console.log('vel x ' + this.vel.x);
+    		console.log('vel y ' + this.vel.y);
     		if(this.pos.x< game.persistent.player.targetx){
 
     			this.vel.x = this.vel.x - this.accel.x*me.timer.tick;
@@ -364,35 +386,29 @@ game.WerewolfEntity = me.ObjectEntity.extend({
         // res.y >0 means touched by something on the bottom
         // which mean at top position for this one
         if (this.alive) {
-            if(me.input.isKeyPressed('attack')) 
-            {
-
-               //me.game.HUD.updateItemValue("health", this.health);
-                //me.game.HUD.updateItemValue("score", 250);
-                //me.game.remove(this);
-                //this.alive = false;
-                game.persistent.opponent.help = 1;
-                 game.persistent.opponent.attack = 1;
-                 console.log('OPPONENT Help MODE '+ game.persistent.opponent.help);
-                    console.log('Hey it collided');
-                    game.persistent.player.convertRate = (0.9/20)*game.persistent.player.kills + 1;
-                    console.log('conv rate:' + game.persistent.player.convertRate);
-                    console.log('kills :' +game.persistent.player.kills);
+            if(me.input.isKeyPressed('attack')) {
+                me.game.HUD.updateItemValue("score", 250);
+		          console.log('ATTACK');
+                if (game.persistent.player.kills <= 80){
+                    game.persistent.player.convertRate = (9/8)*game.persistent.player.kills + 1;
+                    console.log('convert rate:'+ game.persistent.player.convertRate);
+                    console.log('KILLS: '+game.persistent.player.kills);
+		
                     console.log('HEY');
-                    console.log(game.persistent.player.convertRate);
-                    console.log(this.health);
-                    this.health-=(2*game.persistent.player.convertRate);
-                //me.game.HUD.updateItemValue("health", this.health);
-                    if(this.health <=0){
-                    //me.game.add()
-                        //this.renderable.flicker(45);
-                         this.collidable = false;
-                         this.alive = false;
-                         game.persistent.player.kills+=1;
-                        console.log('KILLED ');
-                    game.persistent.opponent.attack = 0;
+                }
+                else{
+                    game.persistent.player.convertRate = (-0.07*game.persistent.player.kills) + 15.6;
+                }
+                console.log(game.persistent.player.convertRate);
+                console.log(this.health);
+                this.health-=(game.persistent.player.convertRate);
+		        if(this.health<=0){
+                	//this.renderable.flicker(45);
+                    me.game.HUD.updateItemValue("score", 250);
+                	this.collidable = false;
                     me.game.remove(this);
-                }       
+                	this.alive = false;
+		        }
             }
         }
     },
@@ -466,35 +482,13 @@ game.VampireEntity = me.ObjectEntity.extend({
         // res.y >0 means touched by something on the bottom
         // which mean at top position for this one
         if (this.alive) {
-            if(me.input.isKeyPressed('attack')) 
-            {
-
-               //me.game.HUD.updateItemValue("health", this.health);
-                //me.game.HUD.updateItemValue("score", 250);
+            if(me.input.isKeyPressed('attack')) {
+                me.game.HUD.updateItemValue("score", 250);
+                //this.renderable.flicker(45);
+                this.collidable = false;
                 //me.game.remove(this);
-                //this.alive = false;
-                game.persistent.opponent.help = 1;
-                 game.persistent.opponent.attack = 1;
-                 console.log('OPPONENT Help MODE '+ game.persistent.opponent.help);
-                    console.log('Hey it collided');
-                    game.persistent.player.convertRate = (-0.9/20)*game.persistent.player.kills + 1;
-                    console.log('conv rate:' + game.persistent.player.convertRate);
-                    console.log('kills :' +game.persistent.player.kills);
-                    console.log('HEY');
-                    console.log(game.persistent.player.convertRate);
-                    console.log(this.health);
-                    this.health-=(2*game.persistent.player.convertRate);
-                //me.game.HUD.updateItemValue("health", this.health);
-                    if(this.health <=0){
-                    //me.game.add()
-                        //this.renderable.flicker(45);
-                         this.collidable = false;
-                         this.alive = false;
-                         game.persistent.player.kills+=1;
-                        console.log('KILLED ');
-                    game.persistent.opponent.attack = 0;
-                    me.game.remove(this);
-                }       
+                this.alive = false;
+                //this.settings.image = obj.image;
             }
         }
     },
