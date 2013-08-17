@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"Player",
+				"PlayerEntity"
+			],
+			[
 				"y",
 				"y"
 			],
@@ -27,7 +31,7 @@
 			"file": "js/game.js",
 			"settings":
 			{
-				"buffer_size": 1754,
+				"buffer_size": 1748,
 				"line_ending": "Unix"
 			}
 		},
@@ -48,18 +52,18 @@
 			}
 		},
 		{
-			"file": "js/entities/entities.js",
-			"settings":
-			{
-				"buffer_size": 12732,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "js/screens/title.js",
 			"settings":
 			{
 				"buffer_size": 271,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/entities/entities.js",
+			"settings":
+			{
+				"buffer_size": 18904,
 				"line_ending": "Unix"
 			}
 		}
@@ -100,6 +104,7 @@
 	},
 	"file_history":
 	[
+		"/Users/Rohan/Documents/Code/BlueJ/PigLatinTranslator/Translator.java",
 		"/Users/Rohan/Documents/CODE/JavaScript/Infection/js/entities/zombie",
 		"/Users/Rohan/Documents/CODE/JavaScript/Infection/js/entities/vampire.js",
 		"/Users/Rohan/Documents/CODE/JavaScript/Infection/js/entities/werewolf.js",
@@ -207,6 +212,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"gravity",
+			"gravit",
+			"flick",
 			"convert_rate",
 			"hud",
 			"area",
@@ -239,7 +247,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 4,
 			"sheets":
 			[
 				{
@@ -247,15 +255,15 @@
 					"file": "js/game.js",
 					"settings":
 					{
-						"buffer_size": 1754,
+						"buffer_size": 1748,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1467,
-								1468
+								1671,
+								1671
 							]
 						],
 						"settings":
@@ -265,7 +273,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 7.0,
+						"translation.y": 205.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -328,34 +336,6 @@
 				},
 				{
 					"buffer": 3,
-					"file": "js/entities/entities.js",
-					"settings":
-					{
-						"buffer_size": 12732,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1809,
-								1809
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 590.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
 					"file": "js/screens/title.js",
 					"settings":
 					{
@@ -374,6 +354,34 @@
 						{
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "js/entities/entities.js",
+					"settings":
+					{
+						"buffer_size": 18904,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								191,
+								193
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -444,6 +452,6 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 203.0,
+	"side_bar_width": 191.0,
 	"status_bar_visible": true
 }
