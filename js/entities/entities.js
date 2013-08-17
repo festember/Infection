@@ -98,7 +98,7 @@ game.PlayerEntity = me.ObjectEntity.extend({
         // any update (e.g. position, animation)
         return false;
     }
- }
+ 
 });
 
 /* --------------------------Converted Entity------------------------ */
@@ -198,7 +198,7 @@ game.ZombieEntity = me.ObjectEntity.extend({
         // res.y >0 means touched by something on the bottom
         // which mean at top position for this one
         if (this.alive) {
-		  //console.log('Collide');	
+		//console.log('Collide');	
             //console.log('onCollision/no attack');
             if(me.input.isKeyPressed('attack')) 
             {
@@ -208,8 +208,9 @@ game.ZombieEntity = me.ObjectEntity.extend({
                 //me.game.remove(this);
                 //this.alive = false;
                 game.persistent.opponent.help = 1;
-			     game.persistent.opponent.attack = 1;
-			     console.log('OPPONENT Help MODE '+ game.persistent.opponent.help);
+                if(me.input.isKeyPressed('attack')){
+			game.persistent.opponent.attack = 1;
+			console.log('OPPONENT Help MODE '+ game.persistent.opponent.help);
                 	console.log('Hey it collided');
                 	if (game.persistent.player.kills <= 80){
                     		game.persistent.player.convertRate = (9/80)*game.persistent.player.kills + 1;
@@ -226,13 +227,12 @@ game.ZombieEntity = me.ObjectEntity.extend({
                 //me.game.HUD.updateItemValue("health", this.health);
                 	if(this.health <=0){
                     //me.game.remove(this);
-                		//this.renderable.flicker(45);
+                		this.renderable.flicker(45);
                			 this.collidable = false;
                 		 this.alive = false;
-                         game.persistent.player.kills+=1;
-				        console.log('KILLED ');
-				    game.persistent.opponent.attack = 0;
-                }
+                         	game.persistent.player.kills+=1;
+				console.log('KILLED ');
+				game.persistent.opponent.attack = 0;
                 //console.log('ATTACK');
                 if (game.persistent.player.kills <= 80){
                     game.persistent.player.convertRate = (9/80)*game.persistent.player.kills + 1;
@@ -259,7 +259,8 @@ game.ZombieEntity = me.ObjectEntity.extend({
             }
 		//game.persistent.opponent.help = 0;
 		console.log('Help ' + game.persistent.opponent.help);
-	   }	
+	}	
+        
     },
  
     // manage the enemy movement
