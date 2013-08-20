@@ -64,10 +64,9 @@ game.PlayerEntity = me.ObjectEntity.extend({
  
         if (res) {
             // if we collide with an enemy
-	    game.persistent.player.targetx =this.pos.x;
-	    game.persistent.player.targety =this.pos.y;
-		if (res.obj.type == me.game.ENEMY_OBJECT && me.input.isKeyPressed('attack')) {
-
+            game.persistent.player.targetx =this.pos.x;
+            game.persistent.player.targety =this.pos.y;
+            if (res.obj.type == me.game.ENEMY_OBJECT && me.input.isKeyPressed('attack')) {
                 //this.renderable.flicker(45);
                 //this.Kill+=1;
                 //this.convertRate = (1/1.414)*(1/Math.exp(Math.pow(this.Kill-this.mean,2)/(2*this.deviation)))*10
@@ -78,15 +77,14 @@ game.PlayerEntity = me.ObjectEntity.extend({
 		            console.log(game.persistent.player.convertRate);
 		            console.log(game.persistent.player.kills);
 		            console.log('HEY');
-                }
-                else{
+                } else {
                     game.persistent.player.convertRate = (-0.07*game.persistent.player.kills) + 15.6;
-                }*/
+                }
                 //me.game.HUD.updateItemValue("kill", game.persistent.player.kills);
                 //me.game.HUD.updateItemValue("convRate", game.persistent.player.convertRate);
 
-                //me.game.HUD.updateItemValue("score", 250);
-            //}
+                //me.game.HUD.updateItemValue("score", 250);*/
+            }
         }
  
         // update animation if necessary
@@ -100,7 +98,6 @@ game.PlayerEntity = me.ObjectEntity.extend({
         // any update (e.g. position, animation)
         return false;
     }
- }
 });
 
 /* --------------------------Converted Entity------------------------ */
@@ -200,46 +197,45 @@ game.ZombieEntity = me.ObjectEntity.extend({
         // res.y >0 means touched by something on the bottom
         // which mean at top position for this one
         if (this.alive) {
-		  //console.log('Collide');	
+            //console.log('Collide');	
             //console.log('onCollision/no attack');
             if(me.input.isKeyPressed('attack')) 
             {
-
-        	   //me.game.HUD.updateItemValue("health", this.health);
+                //me.game.HUD.updateItemValue("health", this.health);
                 //me.game.HUD.updateItemValue("score", 250);
                 //me.game.remove(this);
                 //this.alive = false;
                 game.persistent.opponent.help = 1;
-			     game.persistent.opponent.attack = 1;
-			     //console.log('OPPONENT Help MODE '+ game.persistent.opponent.help);
-                	//console.log('Hey it collided');
-                	if (game.persistent.player.kills <= 80){
-                    		game.persistent.player.convertRate = (9/80)*game.persistent.player.kills + 1;
-		    		//console.log('conv rate:' + game.persistent.player.convertRate);
+			    game.persistent.opponent.attack = 1;
+			    //console.log('OPPONENT Help MODE '+ game.persistent.opponent.help);
+                //console.log('Hey it collided');
+                if (game.persistent.player.kills <= 40) {
+                    game.persistent.player.convertRate = (9/80)*game.persistent.player.kills + 1;
+                    //console.log('conv rate:' + game.persistent.player.convertRate);
 		    		//console.log('kills :' +game.persistent.player.kills);
-		   		 //console.log('HEY');
-                	}
-                	else{
-                	    game.persistent.player.convertRate = (-0.07*game.persistent.player.kills) + 15.6;
-                	}
-                	//console.log(game.persistent.player.convertRate);
-			         //console.log(this.health);
-                	this.health-=(2*game.persistent.player.convertRate);
+                    //console.log('HEY');
+                } else {
+                    game.persistent.player.convertRate = (-0.07*game.persistent.player.kills) + 15.6;
+                }
+                //console.log(game.persistent.player.convertRate);
+                //console.log(this.health);
+                this.health-=(2*game.persistent.player.convertRate);
                 //me.game.HUD.updateItemValue("health", this.health);
-                	if(this.health <=0){
+                if(this.health <=0) {
                     //me.game.add()
-                		//this.renderable.flicker(45);
-               			 this.collidable = false;
-                		 this.alive = false;
-                         game.persistent.player.kills+=1;
-				        console.log('KILLED ');
+                    //this.renderable.flicker(45);
+                    this.collidable = false;
+                    this.alive = false;
+                    game.persistent.player.kills+=1;
+                    me.game.HUD.updateItemValue("score", 250);
+                    console.log('KILLED ');
 				    game.persistent.opponent.attack = 0;
                     me.game.remove(this);
                 }		
             }
-		//game.persistent.opponent.help = 0;
-		//console.log('Help ' + game.persistent.opponent.help);
-	   }	
+            game.persistent.opponent.help = 0;
+            //console.log('Help ' + game.persistent.opponent.help);
+        }	
     },
  
     // manage the enemy movement
@@ -257,64 +253,51 @@ game.ZombieEntity = me.ObjectEntity.extend({
             // make it walk
             this.flipX(this.walkLeft);
             this.vel.x += (this.walkLeft) ? -this.accel.x * me.timer.tick : this.accel.x * me.timer.tick;
-	    if (game.persistent.opponent.help){
-		//console.log('Attacking ZOMBIE MOVING ');	
-		this.angle = Math.atan((game.persistent.player.targety-this.pos.y)/(game.persistent.player.targetx-this.pos.x))
-		this.angle = (180/Math.PI)*this.angle;
-		this.vel.x = this.vel.x * Math.cos(this.angle);
-		this.vel.y = this.vel.y * Math.sin(this.angle);
-		//console.log(' target x ' + game.persistent.player.targetx + ' this.x ' + this.pos.x);
-		//console.log(' target y ' + game.persistent.player.targety + ' this.y ' + this.pos.y);
-		//console.log(' angle ' + this.angle);
-		//console.log('vel x ' + this.vel.x);
-		//console.log('vel y ' + this.vel.y);
-		if(this.pos.x< game.persistent.player.targetx){
-
-			this.vel.x = this.vel.x - this.accel.x*me.timer.tick;
-		}
-		else if(this.pos.x > game.persistent.player.targetx){
-			this.vel.x = this.vel.x + this.accel.x * me.timer.tick;
-		}
-		
-		if(this.pos.y > game.persistent.player.targety){
-			this.vel.y = this.vel.y - this.accel.x * me.timer.tick;
-		}
-		
-		else if(this.pos.y < game.persistent.player.targety){
-			this.vel.y = this.vel.y + this.accel.x * me.timer.tick;
-		}	
-	}       
-         
-	       if (me.input.isKeyPressed('attack')){
-    		//console.log('Attacking ZOMBIE MOVING ');	
-    		this.angle = Math.atan((game.persistent.player.targety-this.pos.y)/(game.persistent.player.targetx-this.pos.x))
-    		this.angle = (180/Math.PI)*this.angle;
-    		this.vel.x = this.vel.x * Math.cos(this.angle);
-    		this.vel.y = this.vel.y * Math.sin(this.angle);
-    		//console.log(' target x ' + game.persistent.player.targetx + ' this.x ' + this.pos.x);
-    		//console.log(' target y ' + game.persistent.player.targety + ' this.y ' + this.pos.y);
-    		//console.log(' angle ' + this.angle);
-    		//console.log('vel x ' + this.vel.x);
-    		//console.log('vel y ' + this.vel.y);
-    		if(this.pos.x< game.persistent.player.targetx){
-
-    			this.vel.x = this.vel.x - this.accel.x*me.timer.tick;
-    		}
-    		else if(this.pos.x > game.persistent.player.targetx){
-    			this.vel.x = this.vel.x + this.accel.x * me.timer.tick;
-    		}
+            if (game.persistent.opponent.help) {
+                //console.log('Attacking ZOMBIE MOVING ');	
+                this.angle = Math.atan((game.persistent.player.targety-this.pos.y)/(game.persistent.player.targetx-this.pos.x))
+                this.angle = (180/Math.PI)*this.angle;
+                this.vel.x = this.vel.x * Math.cos(this.angle);
+                this.vel.y = this.vel.y * Math.sin(this.angle);
+                //console.log(' target x ' + game.persistent.player.targetx + ' this.x ' + this.pos.x);
+                //console.log(' target y ' + game.persistent.player.targety + ' this.y ' + this.pos.y);
+                //console.log(' angle ' + this.angle);
+                //console.log('vel x ' + this.vel.x);
+                //console.log('vel y ' + this.vel.y);
+                if(this.pos.x< game.persistent.player.targetx){
+                    this.vel.x = this.vel.x - this.accel.x*me.timer.tick;
+                } else if(this.pos.x > game.persistent.player.targetx){
+                    this.vel.x = this.vel.x + this.accel.x * me.timer.tick;
+                }
+                if(this.pos.y > game.persistent.player.targety){
+                    this.vel.y = this.vel.y - this.accel.x * me.timer.tick;
+                } else if(this.pos.y < game.persistent.player.targety){
+                    this.vel.y = this.vel.y + this.accel.x * me.timer.tick;
+                }
+            }
+            if (me.input.isKeyPressed('attack')) {
+                //console.log('Attacking ZOMBIE MOVING ');	
+                this.angle = Math.atan((game.persistent.player.targety-this.pos.y)/(game.persistent.player.targetx-this.pos.x))
+                this.angle = (180/Math.PI)*this.angle;
+                this.vel.x = this.vel.x * Math.cos(this.angle);
+                this.vel.y = this.vel.y * Math.sin(this.angle);
+                //console.log(' target x ' + game.persistent.player.targetx + ' this.x ' + this.pos.x);
+                //console.log(' target y ' + game.persistent.player.targety + ' this.y ' + this.pos.y);
+                //console.log(' angle ' + this.angle);
+                //console.log('vel x ' + this.vel.x);
+                //console.log('vel y ' + this.vel.y);
+                if(this.pos.x< game.persistent.player.targetx){
+                    this.vel.x = this.vel.x - this.accel.x*me.timer.tick;
+                } else if(this.pos.x > game.persistent.player.targetx) {
+                    this.vel.x = this.vel.x + this.accel.x * me.timer.tick;
+                }
     		
-    		if(this.pos.y > game.persistent.player.targety){
-    			this.vel.y = this.vel.y - this.accel.x * me.timer.tick;
-    		}
-    		
-    		else if(this.pos.y < game.persistent.player.targety){
-    			this.vel.y = this.vel.y + this.accel.x * me.timer.tick;
-    		}
-    		
-    	}    
-        } else {
-            this.vel.x = 0;
+                if(this.pos.y > game.persistent.player.targety){
+                    this.vel.y = this.vel.y - this.accel.x * me.timer.tick;
+                } else if(this.pos.y < game.persistent.player.targety){
+                    this.vel.y = this.vel.y + this.accel.x * me.timer.tick;
+                }
+            }    
         }
          
         // check and update movement
@@ -362,36 +345,35 @@ game.WerewolfEntity = me.ObjectEntity.extend({
     // call by the engine when colliding with another object
     // obj parameter corresponds to the other object (typically the player) touching this one
     onCollision: function(res, obj) {
- 
         // res.y >0 means touched by something on the bottom
         // which mean at top position for this one
         if (this.alive) {
             if(me.input.isKeyPressed('attack')) 
             {
-
-               //me.game.HUD.updateItemValue("health", this.health);
+                //me.game.HUD.updateItemValue("health", this.health);
                 //me.game.HUD.updateItemValue("score", 250);
                 //me.game.remove(this);
                 //this.alive = false;
                 game.persistent.opponent.help = 1;
-                 game.persistent.opponent.attack = 1;
-                 //console.log('OPPONENT Help MODE '+ game.persistent.opponent.help);
-                    //console.log('Hey it collided');
-                    //game.persistent.player.convertRate = (0.9/20)*game.persistent.player.kills + 1;
-                    //console.log('conv rate:' + game.persistent.player.convertRate);
-                    //console.log('kills :' +game.persistent.player.kills);
-                    //console.log('HEY');
-                    //console.log(game.persistent.player.convertRate);
-                    //console.log(this.health);
-                    this.health-=(2*game.persistent.player.convertRate);
+                game.persistent.opponent.attack = 1;
+                //console.log('OPPONENT Help MODE '+ game.persistent.opponent.help);
+                //console.log('Hey it collided');
+                game.persistent.player.convertRate = (0.9/20)*game.persistent.player.kills + 1;
+                //console.log('conv rate:' + game.persistent.player.convertRate);
+                //console.log('kills :' +game.persistent.player.kills);
+                //console.log('HEY');
+                //console.log(game.persistent.player.convertRate);
+                //console.log(this.health);
+                this.health-=(2*game.persistent.player.convertRate);
                 //me.game.HUD.updateItemValue("health", this.health);
-                    if(this.health <=0){
+                if(this.health <=0) {
                     //me.game.add()
-                        //this.renderable.flicker(45);
-                         this.collidable = false;
-                         this.alive = false;
-                         game.persistent.player.kills+=1;
-                        //console.log('KILLED ');
+                    //this.renderable.flicker(45);
+                    this.collidable = false;
+                    this.alive = false;
+                    game.persistent.player.kills+=1;
+                    me.game.HUD.updateItemValue("score", 250);
+                    console.log('KILLED ');
                     game.persistent.opponent.attack = 0;
                     me.game.remove(this);
                 }       
@@ -471,29 +453,30 @@ game.VampireEntity = me.ObjectEntity.extend({
             if(me.input.isKeyPressed('attack')) 
             {
 
-               //me.game.HUD.updateItemValue("health", this.health);
+                //me.game.HUD.updateItemValue("health", this.health);
                 //me.game.HUD.updateItemValue("score", 250);
                 //me.game.remove(this);
                 //this.alive = false;
                 game.persistent.opponent.help = 1;
-                 game.persistent.opponent.attack = 1;
-                 //console.log('OPPONENT Help MODE '+ game.persistent.opponent.help);
-                    //console.log('Hey it collided');
-                    //game.persistent.player.convertRate = (-0.9/20)*game.persistent.player.kills + 1;
-                    //console.log('conv rate:' + game.persistent.player.convertRate);
-                    //console.log('kills :' +game.persistent.player.kills);
-                    //console.log('HEY');
-                    //console.log(game.persistent.player.convertRate);
-                    //console.log(this.health);
-                    this.health-=(2*game.persistent.player.convertRate);
+                game.persistent.opponent.attack = 1;
+                //console.log('OPPONENT Help MODE '+ game.persistent.opponent.help);
+                //console.log('Hey it collided');
+                game.persistent.player.convertRate = (-0.9/20)*game.persistent.player.kills + 1;
+                //console.log('conv rate:' + game.persistent.player.convertRate);
+                //console.log('kills :' +game.persistent.player.kills);
+                //console.log('HEY');
+                //console.log(game.persistent.player.convertRate);
+                //console.log(this.health);
+                this.health-=(2*game.persistent.player.convertRate);
                 //me.game.HUD.updateItemValue("health", this.health);
                     if(this.health <=0){
                     //me.game.add()
-                        //this.renderable.flicker(45);
-                         this.collidable = false;
-                         this.alive = false;
-                         game.persistent.player.kills+=1;
-                        //console.log('KILLED ');
+                    //this.renderable.flicker(45);
+                    this.collidable = false;
+                    this.alive = false;
+                    game.persistent.player.kills+=1;
+                    me.game.HUD.updateItemValue("score", 250);
+                    console.log('KILLED ');
                     game.persistent.opponent.attack = 0;
                     me.game.remove(this);
                 }       
@@ -516,7 +499,6 @@ game.VampireEntity = me.ObjectEntity.extend({
             // make it walk
             this.flipX(this.walkLeft);
             this.vel.x += (this.walkLeft) ? -this.accel.x * me.timer.tick : this.accel.x * me.timer.tick;
-                 
         } else {
             this.vel.x = 0;
         }

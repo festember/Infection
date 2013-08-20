@@ -116,7 +116,7 @@
    </properties>
    <ellipse/>
   </object>
-  <object name="zombie" x="1280" y="896" width="384" height="64">
+  <object name="zombie" x="1216" y="896" width="384" height="64">
    <properties>
     <property name="image" value="zombie"/>
     <property name="spritewidth" value="64"/>
