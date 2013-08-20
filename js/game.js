@@ -40,6 +40,7 @@ var game = {
         me.entityPool.add("zombie", game.ZombieEntity);
         me.entityPool.add("vampire", game.VampireEntity);
         me.entityPool.add("werewolf", game.WerewolfEntity);
+	me.entityPool.add("converted",game.ConvertedEntity);	
              
         // enable the keyboard
         me.input.bindKey(me.input.KEY.LEFT,  "left");
