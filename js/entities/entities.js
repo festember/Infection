@@ -134,8 +134,8 @@ game.ConvertedEntity = me.ObjectEntity.extend({
     // manage the movement--should follow the player
     update: function() {
         // do nothing if not in viewport
-        if (!this.inViewport)
-            return false;
+        //if (!this.inViewport)
+            //return false;
  
         if (this.alive) {
             this.dir = ObjectEntity.angleTo(PlayerEntity);
