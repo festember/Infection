@@ -19,6 +19,7 @@ game.PlayerEntity = me.ObjectEntity.extend({
  
     init: function(x, y, settings) {
         // call the constructor
+        settings.spritewidth = 64;
         this.parent(x, y, settings);
  
         // set the default horizontal & vertical speed (accel vector)
@@ -37,14 +38,10 @@ game.PlayerEntity = me.ObjectEntity.extend({
     /* -----update the player pos------ */
     update: function() {
         if (me.input.isKeyPressed('left')) {
-            // flip the sprite on horizontal axis
-            //this.flipX(true);
-            // update the entity velocity
+            this.flipX(false);  // unflip the sprite on horizontal axis
             this.vel.x -= this.accel.x * me.timer.tick;
         } else if (me.input.isKeyPressed('right')) {
-            // unflip the sprite
-            //this.flipX(false);
-            // update the entity velocity
+            this.flipX(true);   // flip the sprite
             this.vel.x += this.accel.x * me.timer.tick;
         } else if (me.input.isKeyPressed('up')) {
         	this.vel.y -= this.accel.x * me.timer.tick;
@@ -251,7 +248,7 @@ game.ZombieEntity = me.ObjectEntity.extend({
                 this.walkLeft = true;
             }
             // make it walk
-            this.flipX(this.walkLeft);
+            this.flipX(!this.walkLeft);
             this.vel.x += (this.walkLeft) ? -this.accel.x * me.timer.tick : this.accel.x * me.timer.tick;
             if (game.persistent.opponent.help) {
                 //console.log('Attacking ZOMBIE MOVING ');	

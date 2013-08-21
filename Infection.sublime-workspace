@@ -28,6 +28,14 @@
 	"buffers":
 	[
 		{
+			"file": "js/resources.js",
+			"settings":
+			{
+				"buffer_size": 827,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "js/game.js",
 			"settings":
 			{
@@ -36,10 +44,10 @@
 			}
 		},
 		{
-			"file": "js/resources.js",
+			"file": "js/entities/entities.js",
 			"settings":
 			{
-				"buffer_size": 827,
+				"buffer_size": 20021,
 				"line_ending": "Unix"
 			}
 		},
@@ -56,14 +64,6 @@
 			"settings":
 			{
 				"buffer_size": 271,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "js/entities/entities.js",
-			"settings":
-			{
-				"buffer_size": 18904,
 				"line_ending": "Unix"
 			}
 		}
@@ -96,7 +96,7 @@
 	"distraction_free":
 	{
 		"menu_visible": true,
-		"show_minimap": false,
+		"show_minimap": true,
 		"show_open_files": false,
 		"show_tabs": false,
 		"side_bar_visible": false,
@@ -104,6 +104,12 @@
 	},
 	"file_history":
 	[
+		"/Users/Rohan/Documents/Code/JavaScript/rsinha.me/README.md",
+		"/Users/Rohan/Documents/CODE/JavaScript/Infection/js/game.js",
+		"/Users/Rohan/Documents/CODE/JavaScript/Infection/js/entities/entities.js",
+		"/Users/Rohan/Library/Application Support/Sublime Text 2/Packages/Default/Default (OSX).sublime-keymap",
+		"/Users/Rohan/Library/Application Support/Sublime Text 2/Packages/User/Default (OSX).sublime-keymap",
+		"/Users/Rohan/Documents/College/Data Structures/w7rbtDel.cpp",
 		"/Users/Rohan/Documents/Code/BlueJ/PigLatinTranslator/Translator.java",
 		"/Users/Rohan/Documents/CODE/JavaScript/Infection/js/entities/zombie",
 		"/Users/Rohan/Documents/CODE/JavaScript/Infection/js/entities/vampire.js",
@@ -212,6 +218,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"space",
+			"log",
+			"flowchart",
 			"gravity",
 			"gravit",
 			"flick",
@@ -247,39 +256,11 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "js/game.js",
-					"settings":
-					{
-						"buffer_size": 1748,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1671,
-								1671
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 205.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
 					"file": "js/resources.js",
 					"settings":
 					{
@@ -307,7 +288,63 @@
 					"type": "text"
 				},
 				{
+					"buffer": 1,
+					"file": "js/game.js",
+					"settings":
+					{
+						"buffer_size": 1748,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
 					"buffer": 2,
+					"file": "js/entities/entities.js",
+					"settings":
+					{
+						"buffer_size": 20021,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
 					"file": "js/screens/play.js",
 					"settings":
 					{
@@ -318,8 +355,8 @@
 						"selection":
 						[
 							[
-								355,
-								355
+								257,
+								260
 							]
 						],
 						"settings":
@@ -335,7 +372,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 4,
 					"file": "js/screens/title.js",
 					"settings":
 					{
@@ -354,34 +391,6 @@
 						{
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "js/entities/entities.js",
-					"settings":
-					{
-						"buffer_size": 18904,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								191,
-								193
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -427,6 +436,10 @@
 	{
 		"height": 159.0
 	},
+	"output.git":
+	{
+		"height": 100.0
+	},
 	"replace":
 	{
 		"height": 64.0
@@ -448,10 +461,10 @@
 		],
 		"width": 380.0
 	},
-	"show_minimap": true,
+	"show_minimap": false,
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 191.0,
+	"side_bar_width": 123.0,
 	"status_bar_visible": true
 }
