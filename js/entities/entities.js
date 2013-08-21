@@ -101,7 +101,7 @@ game.PlayerEntity = me.ObjectEntity.extend({
 game.ConvertedEntity = me.ObjectEntity.extend({
     init: function(x, y, settings) {
         // define this here instead of tiled
-        settings.image = "player";
+        settings.image = "zombie";
         settings.spritewidth = 64;
  
         // call the parent constructor
@@ -128,11 +128,12 @@ game.ConvertedEntity = me.ObjectEntity.extend({
     // manage the movement--should follow the player
     update: function() {
         // do nothing if not in viewport
-        if (!this.inViewport)
-            return false;
+        //if (!this.inViewport)
+            //return false;
  
         if (this.alive) {
             this.dir = ObjectEntity.angleTo(PlayerEntity);
+	    console.log('The direction vector ' + this.dir);
             if (this.walkLeft && this.pos.x <= this.startX) {
                 this.walkLeft = false;
             } else if (!this.walkLeft && this.pos.x >= this.endX) {
@@ -220,14 +221,18 @@ game.ZombieEntity = me.ObjectEntity.extend({
                 //me.game.HUD.updateItemValue("health", this.health);
                 if(this.health <=0) {
                     //me.game.add()
-                    //this.renderable.flicker(45);
+                    //var z = me.entityPool.newInstanceOf("converted", this.pos.x, this.pos.y);
+		    //this.renderable.flicker(45);
                     this.collidable = false;
                     this.alive = false;
                     game.persistent.player.kills+=1;
                     me.game.HUD.updateItemValue("score", 250);
                     console.log('KILLED ');
-				    game.persistent.opponent.attack = 0;
+		    game.persistent.opponent.attack = 0;
                     me.game.remove(this);
+                    var obj = new game.ConvertedEntity(this.pos.x,this.pos.y);
+		    me.game.add(obj, this.z);
+		    me.game.sort();
                 }		
             }
             game.persistent.opponent.help = 0;
