@@ -256,6 +256,7 @@ game.ZombieEntity = me.ObjectEntity.extend({
             this.flipX(!this.walkLeft);
             this.vel.x += (this.walkLeft) ? -this.accel.x * me.timer.tick : this.accel.x * me.timer.tick;
             if (game.persistent.opponent.help) {
+		console.log('The angle:'+me.ObjectEntity.angleTo(game.PlayerEntity));	
                 //console.log('Attacking ZOMBIE MOVING ');	
                 this.angle = Math.atan((game.persistent.player.targety-this.pos.y)/(game.persistent.player.targetx-this.pos.x))
                 this.angle = (180/Math.PI)*this.angle;
@@ -276,9 +277,12 @@ game.ZombieEntity = me.ObjectEntity.extend({
                 } else if(this.pos.y < game.persistent.player.targety){
                     this.vel.y = this.vel.y + this.accel.x * me.timer.tick;
                 }
+		
+
             }
             if (me.input.isKeyPressed('attack')) {
                 //console.log('Attacking ZOMBIE MOVING ');	
+                console.log('the angle ' + me.angleTo(game.PlayerEntity));
                 this.angle = Math.atan((game.persistent.player.targety-this.pos.y)/(game.persistent.player.targetx-this.pos.x))
                 this.angle = (180/Math.PI)*this.angle;
                 this.vel.x = this.vel.x * Math.cos(this.angle);
@@ -299,6 +303,7 @@ game.ZombieEntity = me.ObjectEntity.extend({
                 } else if(this.pos.y < game.persistent.player.targety){
                     this.vel.y = this.vel.y + this.accel.x * me.timer.tick;
                 }
+		
             }    
         }
          
