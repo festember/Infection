@@ -37,7 +37,7 @@ game.PlayerEntity = me.ObjectEntity.extend({
         this.convertRate = 0; 
         this.deviation = 850;
         this.mean = 80;
-	this.collidabe = true;
+        this.collidabe = true;
  
     },
  
@@ -69,13 +69,13 @@ game.PlayerEntity = me.ObjectEntity.extend({
             // if we collide with an enemy
             game.persistent.player.targetx =this.pos.x;
             game.persistent.player.targety =this.pos.y;
-	    game.persistent.player.signal = 1; //signal to form the square 
-	    game.persistent.player.boundary_x = this.pos.x+50;
-	     game.persistent.player.negboundary_x = this.pos.x - 50;
-	     game.persistent.player.boundary_y = this.pos.y + 50;
-	     game.persistent.player.negboundary_y = this.pos.y - 50;
-//		console.log(' The pos ' + this.pos.x + ' , ' +this.pos.y + ' and signal is ' +  game.persistent.player.signal);
-//		console.log(' The boundary x' +  game.persistent.player.boundary_x + ' The boundary_y ' +  game.persistent.player.boundary_y+ 'The boundary neg x '+  game.persistent.player.negboundary_x + 'the negboundary y ' +  game.persistent.player.negboundary_y);
+    	    game.persistent.player.signal = 1; //signal to form the square 
+    	    game.persistent.player.boundary_x = this.pos.x+50;
+            game.persistent.player.negboundary_x = this.pos.x - 50;
+            game.persistent.player.boundary_y = this.pos.y + 50;
+            game.persistent.player.negboundary_y = this.pos.y - 50;
+            //console.log(' The pos ' + this.pos.x + ' , ' +this.pos.y + ' and signal is ' +  game.persistent.player.signal);
+            //console.log(' The boundary x' +  game.persistent.player.boundary_x + ' The boundary_y ' +  game.persistent.player.boundary_y+ 'The boundary neg x '+  game.persistent.player.negboundary_x + 'the negboundary y ' +  game.persistent.player.negboundary_y);
             if (res.obj.type == me.game.ENEMY_OBJECT && me.input.isKeyPressed('attack')) {
                 //this.renderable.flicker(45);
                 //this.Kill+=1;
@@ -96,8 +96,8 @@ game.PlayerEntity = me.ObjectEntity.extend({
                 //me.game.HUD.updateItemValue("score", 250);*/
             }
         }
-	//game.persistent.player.signal = 0;
-//	console.log(' The signal now is ' +  game.persistent.player.signal);
+        //game.persistent.player.signal = 0;
+        //console.log(' The signal now is ' +  game.persistent.player.signal);
  
         // update animation if necessary
         if (this.vel.x!=0 || this.vel.y!=0) {
@@ -227,7 +227,7 @@ game.ZombieEntity = me.ObjectEntity.extend({
                 if(this.health <=0) {
                     //con = new game.ConvertedEntity();//this.pos.x, this.pos.y);
 		    
-		    //me.game.add(con, this.spriteZIndex);
+                    //me.game.add(con, this.spriteZIndex);
                     //this.renderable.flicker(45);
                     this.collidable = false;
                     this.alive = false;
@@ -265,81 +265,76 @@ game.ZombieEntity = me.ObjectEntity.extend({
 		    }
 	     }
 
-            if (this.walkLeft && this.pos.x <= this.startX) {
-                this.walkLeft = false;
-            } else if (!this.walkLeft && this.pos.x >= this.endX) {
-                this.walkLeft = true;
-            }
-	/*
-	var res = me.game.collide(me.PlayerEntity);
-	if(res)
-	{
-		this.flipX(!this.walkLeft);
-	}
-*/
-            // make it walk
-            this.flipX(!this.walkLeft);
-            this.vel.x += (this.walkLeft) ? -this.accel.x * me.timer.tick : this.accel.x * me.timer.tick;
-            if (game.persistent.opponent.help) {
-                //console.log('Attacking ZOMBIE MOVING ');	
-                this.angle = Math.atan((game.persistent.player.targety-this.pos.y)/(game.persistent.player.targetx-this.pos.x))
-                this.angle = (180/Math.PI)*this.angle;
-                this.vel.x = this.vel.x * Math.cos(this.angle);
-                this.vel.y = this.vel.y * Math.sin(this.angle);
-                //console.log(' target x ' + game.persistent.player.targetx + ' this.x ' + this.pos.x);
-                //console.log(' target y ' + game.persistent.player.targety + ' this.y ' + this.pos.y);
-                //console.log(' angle ' + this.angle);
-                //console.log('vel x ' + this.vel.x);
-                //console.log('vel y ' + this.vel.y);
-                if(this.pos.x< game.persistent.player.targetx){
-                    this.vel.x = this.vel.x - this.accel.x*me.timer.tick;
-                } else if(this.pos.x > game.persistent.player.targetx){
-                    this.vel.x = this.vel.x + this.accel.x * me.timer.tick;
-                }
-                if(this.pos.y > game.persistent.player.targety){
-                    this.vel.y = this.vel.y - this.accel.x * me.timer.tick;
-                } else if(this.pos.y < game.persistent.player.targety){
-                    this.vel.y = this.vel.y + this.accel.x * me.timer.tick;
-                }
-		
-
-            }
-            else if (me.input.isKeyPressed('attack')) {
-                //console.log('Attacking ZOMBIE MOVING ');	
-                this.angle = Math.atan((game.persistent.player.targety-this.pos.y)/(game.persistent.player.targetx-this.pos.x))
-                this.angle = (180/Math.PI)*this.angle;
-                this.vel.x = this.vel.x * Math.cos(this.angle);
-                this.vel.y = this.vel.y * Math.sin(this.angle);
-                //console.log(' target x ' + game.persistent.player.targetx + ' this.x ' + this.pos.x);
-                //console.log(' target y ' + game.persistent.player.targety + ' this.y ' + this.pos.y);
-                //console.log(' angle ' + this.angle);
-                //console.log('vel x ' + this.vel.x);
-                //console.log('vel y ' + this.vel.y);
-                if(this.pos.x< game.persistent.player.targetx){
-                    this.vel.x = this.vel.x - this.accel.x*me.timer.tick;
-                } else if(this.pos.x > game.persistent.player.targetx) {
-                    this.vel.x = this.vel.x + this.accel.x * me.timer.tick;
-                }
-    		
-                if(this.pos.y > game.persistent.player.targety){
-                    this.vel.y = this.vel.y - this.accel.x * me.timer.tick;
-                } else if(this.pos.y < game.persistent.player.targety){
-                    this.vel.y = this.vel.y + this.accel.x * me.timer.tick;
-                }
-		
-            }    
+        if (this.walkLeft && this.pos.x <= this.startX) {
+            this.walkLeft = false;
+        } else if (!this.walkLeft && this.pos.x >= this.endX) {
+            this.walkLeft = true;
         }
+    	/*
+    	var res = me.game.collide(me.PlayerEntity);
+    	if(res)
+    	{
+    		this.flipX(!this.walkLeft);
+    	} */
+        // make it walk
+        this.flipX(!this.walkLeft);
+        this.vel.x += (this.walkLeft) ? -this.accel.x * me.timer.tick : this.accel.x * me.timer.tick;
+        if (game.persistent.opponent.help) {
+            //console.log('Attacking ZOMBIE MOVING ');	
+            this.angle = Math.atan((game.persistent.player.targety-this.pos.y)/(game.persistent.player.targetx-this.pos.x))
+            this.angle = (180/Math.PI)*this.angle;
+            this.vel.x = this.vel.x * Math.cos(this.angle);
+            this.vel.y = this.vel.y * Math.sin(this.angle);
+            //console.log(' target x ' + game.persistent.player.targetx + ' this.x ' + this.pos.x);
+            //console.log(' target y ' + game.persistent.player.targety + ' this.y ' + this.pos.y);
+            //console.log(' angle ' + this.angle);
+            //console.log('vel x ' + this.vel.x);
+            //console.log('vel y ' + this.vel.y);
+            if(this.pos.x< game.persistent.player.targetx){
+                this.vel.x = this.vel.x - this.accel.x*me.timer.tick;
+            } else if(this.pos.x > game.persistent.player.targetx){
+                this.vel.x = this.vel.x + this.accel.x * me.timer.tick;
+            }
+            if(this.pos.y > game.persistent.player.targety){
+                this.vel.y = this.vel.y - this.accel.x * me.timer.tick;
+            } else if(this.pos.y < game.persistent.player.targety){
+                this.vel.y = this.vel.y + this.accel.x * me.timer.tick;
+            }
+		} else if (me.input.isKeyPressed('attack')) {
+            //console.log('Attacking ZOMBIE MOVING ');	
+            this.angle = Math.atan((game.persistent.player.targety-this.pos.y)/(game.persistent.player.targetx-this.pos.x))
+            this.angle = (180/Math.PI)*this.angle;
+            this.vel.x = this.vel.x * Math.cos(this.angle);
+            this.vel.y = this.vel.y * Math.sin(this.angle);
+            //console.log(' target x ' + game.persistent.player.targetx + ' this.x ' + this.pos.x);
+            //console.log(' target y ' + game.persistent.player.targety + ' this.y ' + this.pos.y);
+            //console.log(' angle ' + this.angle);
+            //console.log('vel x ' + this.vel.x);
+            //console.log('vel y ' + this.vel.y);
+            if(this.pos.x< game.persistent.player.targetx){
+                this.vel.x = this.vel.x - this.accel.x*me.timer.tick;
+            } else if(this.pos.x > game.persistent.player.targetx) {
+                this.vel.x = this.vel.x + this.accel.x * me.timer.tick;
+            }
+		
+            if(this.pos.y > game.persistent.player.targety){
+                this.vel.y = this.vel.y - this.accel.x * me.timer.tick;
+            } else if(this.pos.y < game.persistent.player.targety){
+                this.vel.y = this.vel.y + this.accel.x * me.timer.tick;
+            }
+        }    
+    }
          
-        // check and update movement
-        this.updateMovement();
-         
-        // update animation if necessary
-        if (this.vel.x!=0 || this.vel.y!=0) {
-            // update object animation
-            this.parent();
-            return true;
-        }
-        return false;
+    // check and update movement
+    this.updateMovement();
+     
+    // update animation if necessary
+    if (this.vel.x!=0 || this.vel.y!=0) {
+        // update object animation
+        this.parent();
+        return true;
+    }
+    return false;
     }
 });
 
