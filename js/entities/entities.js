@@ -252,7 +252,7 @@ game.ZombieEntity = me.ObjectEntity.extend({
         if (this.alive) {
 	    if ( game.persistent.player.signal == 1)
 	    {
-		    console.log('Signal reached the zombies');
+		   // console.log('Signal reached the zombies');
 		    if (this.pos.x>=game.persistent.player.negboundary_x && this.pos.x<= game.persistent.player.boundary_x)
 		    {
 			    if(this.pos.y<= game.persistent.player.boundary_y && this.pos.y >=  game.persistent.player.negboundary_y)
