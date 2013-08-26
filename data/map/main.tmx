@@ -102,13 +102,6 @@
    </properties>
    <ellipse/>
   </object>
-  <object name="me.LevelEntity" x="1664" y="704" width="128" height="64">
-   <properties>
-    <property name="duration" value="250"/>
-    <property name="fade" value="#000000"/>
-    <property name="to" value="room1"/>
-   </properties>
-  </object>
   <object name="zombie" x="640" y="768" width="192" height="64">
    <properties>
     <property name="image" value="zombie"/>

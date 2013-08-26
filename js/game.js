@@ -4,7 +4,7 @@ var game = {
     // Run on page load.
     "onload" : function () {
         // Initialize the video.
-        if (!me.video.init("screen", 640, 480, true, 'auto')) {
+        if (!me.video.init("screen", 1280, 960, true, 'auto')) {
             alert("Your browser does not support HTML5 canvas.");
             return;
         }
@@ -40,7 +40,7 @@ var game = {
         me.entityPool.add("zombie", game.ZombieEntity);
         me.entityPool.add("vampire", game.VampireEntity);
         me.entityPool.add("werewolf", game.WerewolfEntity);
-	me.entityPool.add("converted",game.ConvertedEntity);	
+        me.entityPool.add("converted",game.ConvertedEntity);	
              
         // enable the keyboard
         me.input.bindKey(me.input.KEY.LEFT,  "left");
@@ -48,6 +48,7 @@ var game = {
         me.input.bindKey(me.input.KEY.UP,    "up");
         me.input.bindKey(me.input.KEY.DOWN,  "down");
         me.input.bindKey(me.input.KEY.X,     "attack");
+        me.input.bindKey(me.input.KEY.A,     "attract");
 
         me.sys.gravity = 0;
         // Start the game.
