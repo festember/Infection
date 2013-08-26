@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"sp",
+				"spritewidth"
+			],
+			[
 				"Player",
 				"PlayerEntity"
 			],
@@ -36,18 +40,18 @@
 			}
 		},
 		{
-			"file": "js/game.js",
+			"file": "js/entities/entities.js",
 			"settings":
 			{
-				"buffer_size": 1748,
+				"buffer_size": 20459,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "js/entities/entities.js",
+			"file": "js/game.js",
 			"settings":
 			{
-				"buffer_size": 20021,
+				"buffer_size": 1803,
 				"line_ending": "Unix"
 			}
 		},
@@ -104,9 +108,9 @@
 	},
 	"file_history":
 	[
+		"/Users/Rohan/Documents/CODE/JavaScript/Infection/js/entities/entities.js",
 		"/Users/Rohan/Documents/Code/JavaScript/rsinha.me/README.md",
 		"/Users/Rohan/Documents/CODE/JavaScript/Infection/js/game.js",
-		"/Users/Rohan/Documents/CODE/JavaScript/Infection/js/entities/entities.js",
 		"/Users/Rohan/Library/Application Support/Sublime Text 2/Packages/Default/Default (OSX).sublime-keymap",
 		"/Users/Rohan/Library/Application Support/Sublime Text 2/Packages/User/Default (OSX).sublime-keymap",
 		"/Users/Rohan/Documents/College/Data Structures/w7rbtDel.cpp",
@@ -218,6 +222,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"angleTo",
 			"space",
 			"log",
 			"flowchart",
@@ -256,7 +261,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -289,18 +294,18 @@
 				},
 				{
 					"buffer": 1,
-					"file": "js/game.js",
+					"file": "js/entities/entities.js",
 					"settings":
 					{
-						"buffer_size": 1748,
+						"buffer_size": 20459,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								398,
+								398
 							]
 						],
 						"settings":
@@ -317,10 +322,10 @@
 				},
 				{
 					"buffer": 2,
-					"file": "js/entities/entities.js",
+					"file": "js/game.js",
 					"settings":
 					{
-						"buffer_size": 20021,
+						"buffer_size": 1803,
 						"regions":
 						{
 						},
@@ -465,6 +470,6 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 123.0,
+	"side_bar_width": 158.0,
 	"status_bar_visible": true
 }
