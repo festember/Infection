@@ -14,7 +14,24 @@ game.persistent = {
 var hero  = undefined;
 var heroSettings = undefined;
 game.PlayerEntity = me.ObjectEntity.extend({
- 
+    draw: function(context, rect) {
+        this.parent(context, rect);
+        this.drawHealth(context);
+      },
+      drawHealth: function(context) {
+        var percent = this.health / 500.0;
+        var width = this.getCollisionBox().width*percent;
+        context.fillStyle = 'blue';
+        context.fillRect(this.getCollisionBox().x, this.pos.y - 12, width, 10);
+      },
+      getCollisionBox: function() {
+        return {
+          x: this.pos.x + this.collisionBox.colPos.x,
+          y: this.pos.y + this.collisionBox.colPos.y,
+          width: this.collisionBox.width,
+          height: this.collisionBox.height
+        };
+      }, 
     /* -----constructor------ */
 
     init: function(x, y, settings) {
@@ -33,6 +50,7 @@ game.PlayerEntity = me.ObjectEntity.extend({
         this.deviation = 850;
         this.mean = 80;
         this.collidabe = true;
+        this.health = 500.0;
  
     },
  
@@ -56,13 +74,22 @@ game.PlayerEntity = me.ObjectEntity.extend({
             this.vel.x = 0;
             this.vel.y = 0;
         }   
+
+        if(this.pos.x<0)
+            this.pos.x = 0; 
+        if(this.pos.x>2500)
+            this.pos.x=2500;
+        if(this.pos.y<0)
+            this.pos.y = 0; 
+        if(this.pos.y>2350)
+            this.pos.y = 2350;
+
         //check & update player movement
         this.updateMovement();
         var res = me.game.collide(this);
         if (res) {
             // if we collide with an enemy
 
-            
             if (res.obj.type == me.game.ENEMY_OBJECT && me.input.isKeyPressed('attack')) {
                 //this.renderable.flicker(45);
                 res.obj.health-=(2*this.convertRate);
@@ -110,7 +137,7 @@ game.ConvertedEntity = me.ObjectEntity.extend({
     init: function(x, y, settings) {
         // define this here instead of tiled
         settings.name="con";
-        settings.image = "vampire";
+        settings.image = "werewolf";
         
  
         // call the parent constructor
@@ -170,9 +197,24 @@ game.ConvertedEntity = me.ObjectEntity.extend({
             var nx =  (hero.pos.x-this.pos.x)*1.0/dist;
             var ny =  (hero.pos.y-this.pos.y)*1.0/dist;
 
-            this.vel.x = nx*5;
-            this.vel.y = ny*5; 
+            if(dist > 10)
+            {
+                this.vel.x = nx*5;
+                this.vel.y = ny*5; 
+            } else {
+                this.vel.x = 0;
+                this.vel.y = 0;
+            }
         }
+
+        if(this.pos.x<0)
+            this.pos.x = 0; 
+        if(this.pos.x>2500)
+            this.pos.x=2500;
+        if(this.pos.y<0)
+            this.pos.y = 0; 
+        if(this.pos.y>2350)
+            this.pos.y = 2350;
          
         // check and update movement
         this.updateMovement();
@@ -246,21 +288,22 @@ game.ZombieEntity = me.ObjectEntity.extend({
         var res = me.game.collide(this);
         if (res && this.alive ){
             if(me.input.isKeyPressed('attack')) {
-                hero.convertRate = (hero.Kill <= 40)? (9/80)*hero.Kill + 1 :(-0.07*hero.Kill) + 15.6 ;  
+                hero.convertRate = (hero.Kill <= 40)? (9/80)*hero.Kill + 1 :(-0.07*hero.Kill) + 15.6 ;
+                hero.health -= 0.1;
             }
             if(res.obj.name=="con") {
                 res.obj.health-=hero.convertRate;
             }   
         }
         if(this.health <=0) {
-                    hero.Kill+=1;
-                    con = new game.ConvertedEntity(this.pos.x, this.pos.y, this.settings);
-                    me.game.add(con, 4);
-                    me.game.sort();
-                    this.collidable = false;
-                    this.alive = false;
-                    me.game.HUD.updateItemValue("score", 250);
-                    me.game.remove(this);
+            hero.Kill+=1;
+            con = new game.ConvertedEntity(this.pos.x, this.pos.y, this.settings);
+            me.game.add(con, 4);
+            me.game.sort();
+            this.collidable = false;
+            this.alive = false;
+            me.game.HUD.updateItemValue("score", 250);
+            me.game.remove(this);
         }   
         
         // do nothing if not in viewport
@@ -277,10 +320,10 @@ game.ZombieEntity = me.ObjectEntity.extend({
 
             if (me.input.isKeyPressed('attack')) {
                 if(dist<300) {
-                            var nx =  (hero.pos.x-this.pos.x)*1.0/dist;
-                            var ny =  (hero.pos.y-this.pos.y)*1.0/dist;
-                            this.vel.x = nx*5;
-                            this.vel.y = ny*5; 
+                    var nx =  (hero.pos.x-this.pos.x)*1.0/dist;
+                    var ny =  (hero.pos.y-this.pos.y)*1.0/dist;
+                    this.vel.x = nx*5;
+                    this.vel.y = ny*5; 
                 }
             }
             else{
@@ -346,7 +389,6 @@ game.WerewolfEntity = me.ObjectEntity.extend({
         if (this.alive) {
             if(me.input.isKeyPressed('attack')) 
             {
-                
                 game.persistent.opponent.help = 1;
                 game.persistent.opponent.attack = 1;
                 
@@ -360,7 +402,6 @@ game.WerewolfEntity = me.ObjectEntity.extend({
                     //this.renderable.flicker(45);
                     this.collidable = false;
                     this.alive = false;
-
                     me.game.HUD.updateItemValue("score", 250);
                     console.log('KILLED ');
                     game.persistent.opponent.attack = 0;
@@ -491,6 +532,21 @@ game.VampireEntity = me.ObjectEntity.extend({
             return true;
         }
         return false;
+    }
+});
+
+game.Brains = me.CollectableEntity.extend({
+    init: function(x, y, settings) {
+        // call the parent constructor
+        this.parent(x, y, settings);
+    },
+    onCollision: function() {
+        // do something when collected
+ 
+        // make sure it cannot be collected "again"
+        this.collidable = false;
+        // remove it
+        me.game.remove(this);
     }
 });
 

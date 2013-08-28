@@ -10,6 +10,7 @@ game.resources = [
     {name: "zombie", type:"image", src: "data/img/sprite/zombie.png"},
     {name: "werewolf", type:"image", src: "data/img/sprite/werewolf.png"},
     {name: "vampire", type:"image", src: "data/img/sprite/vampire.png"},
+    {name: "brain",  type:"image", src: "data/img/sprite/brain.png"},
     /* 
      * Maps. 
      */
