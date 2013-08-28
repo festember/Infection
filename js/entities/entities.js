@@ -300,15 +300,18 @@ game.ZombieEntity = me.ObjectEntity.extend({
             this.anglex = Math.floor(Math.random()*360);
         }
         
-        var res = me.game.collide(this);
+        var res = me.game.collide(this, true);
         if (res && this.alive ){
-            if(me.input.isKeyPressed('attack')) {
-                hero.convertRate = (hero.Kill <= 40)? (9/80)*hero.Kill + 1 :(-0.07*hero.Kill) + 15.6 ;
-                hero.health -= 0.1;
+            for(var i=0, len=res.length; i<len;i++){
+                if(me.input.isKeyPressed('attack') && res[i].obj.name=="mainplayer") {
+                    hero.convertRate = (hero.Kill <= 40)? (9/80)*hero.Kill + 1 :(-0.07*hero.Kill) + 15.6 ;
+                    hero.health -= 0.2;
+                }
+                if(res[i].obj.name=="con") {
+                    res[i].obj.health-=hero.convertRate;
+                }    
             }
-            if(res.obj.name=="con") {
-                res.obj.health-=hero.convertRate;
-            }   
+               
         }
         if(this.health <=0) {
             hero.Kill+=1;
@@ -377,7 +380,7 @@ game.Brains = me.CollectableEntity.extend({
         if(res && obj.name == "mainplayer") {
             if(me.input.isKeyPressed('pick') && hero.health < 500)
             {
-                hero.health = 500;
+                hero.health = Math.min(500, hero.health+200)
                 this.collidable = false;
                 me.game.remove(this);
             }

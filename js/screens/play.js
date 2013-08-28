@@ -20,7 +20,7 @@ game.PlayScreen = me.ScreenObject.extend({
 			var con = new game.ZombieEntity(Math.floor(Math.random()*2250), Math.floor(Math.random()*2250), heroSettings);
             me.game.add(con, 3);
 		}
-		for(var i = 0; i < 25; i++) 
+		for(var i = 0; i < 15; i++) 
 		{
 			var con = new game.Brains(Math.floor(Math.random()*2000), Math.floor(Math.random()*2000), heroSettings);
             me.game.add(con, 3);
