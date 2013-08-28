@@ -156,8 +156,23 @@ game.ConvertedEntity = me.ObjectEntity.extend({
     onCollision: function(res, obj) {
         // res.y >0 means touched by something on the bottom
         // which mean at top position for this one
-        
-        
+        if(obj.name == "con")
+        {
+            var i = Math.floor(Math.random()*4)
+            if(i == 0) {
+                this.pos.x -= 64;
+                this.pos.y -= 64;
+            } else if(i == 1) {
+                this.pos.x += 64;
+                this.pos.y -= 64;
+            } else if(i == 2) {
+                this.pos.x += 64;
+                this.pos.x -= 64;
+            } else {
+                this.pos.x += 64;
+                this.pos.y += 64;
+            }
+        }
     },
  
     // manage the movement--should follow the player
@@ -337,10 +352,8 @@ game.ZombieEntity = me.ObjectEntity.extend({
             if(this.pos.y<0)
                 this.pos.y = 0; 
             if(this.pos.y>2350)
-                this.pos.y = 2350;          
-            
+                this.pos.y = 2350;  
         } 
-        
 
         this.updateMovement();
 
@@ -352,6 +365,25 @@ game.ZombieEntity = me.ObjectEntity.extend({
     }
 });
 
+game.Brains = me.CollectableEntity.extend({
+    init: function(x, y, settings) {
+        settings.name = "brain";
+        settings.image = "brain";
+        settings.spritewidth = 64;
+        // call the parent constructor
+        this.parent(x, y, settings);
+    },
+    onCollision: function(res, obj) {
+        if(res && obj.name == "mainplayer") {
+            if(me.input.isKeyPressed('pick') && hero.health < 500)
+            {
+                hero.health = 500;
+                this.collidable = false;
+                me.game.remove(this);
+            }
+        }
+    }
+});
 
 /* --------------------------Werewolf Entity------------------------ */
 game.WerewolfEntity = me.ObjectEntity.extend({
@@ -532,21 +564,6 @@ game.VampireEntity = me.ObjectEntity.extend({
             return true;
         }
         return false;
-    }
-});
-
-game.Brains = me.CollectableEntity.extend({
-    init: function(x, y, settings) {
-        // call the parent constructor
-        this.parent(x, y, settings);
-    },
-    onCollision: function() {
-        // do something when collected
- 
-        // make sure it cannot be collected "again"
-        this.collidable = false;
-        // remove it
-        me.game.remove(this);
     }
 });
 
