@@ -58,6 +58,7 @@ game.PlayerEntity = me.ObjectEntity.extend({
  
     /* -----update the player pos------ */
     update: function() {
+	    /*
         if(me.input.isKeyPressed('audio')) {
             if(toggleAudio == 1) {
                     me.audio.pause("horror");
@@ -67,62 +68,64 @@ game.PlayerEntity = me.ObjectEntity.extend({
                 toggleAudio = 1;
             }
         }
-        if (me.input.isKeyPressed('left')) {
-            this.flipX(true);  // unflip the sprite on horizontal axis
-            this.vel.x -= this.accel.x * me.timer.tick;
-            this.vel.y=0;
-        } else if (me.input.isKeyPressed('right')) {
-            this.flipX(false);   // flip the sprite
-            this.vel.x += this.accel.x * me.timer.tick;
-            this.vel.y=0;
-        } else if (me.input.isKeyPressed('up')) {
-            this.vel.y -= this.accel.x * me.timer.tick;
-            this.vel.x=0;
-        }  else if (me.input.isKeyPressed('down')) {
-            this.vel.y += this.accel.x * me.timer.tick;
-            this.vel.x=0;
-        } else {
-            this.vel.x = 0;
-            this.vel.y = 0;
-        }   
+	*/
+		if(this.alive) {
+			if (me.input.isKeyPressed('left')) {
+		        		this.flipX(true);  // unflip the sprite on horizontal axis
+		        		this.vel.x -= this.accel.x * me.timer.tick;
+		        		this.vel.y=0;
+		   	 	} else if (me.input.isKeyPressed('right')) {
+		        		this.flipX(false);   // flip the sprite
+		        		this.vel.x += this.accel.x * me.timer.tick;
+		        		this.vel.y=0;
+		    	} else if (me.input.isKeyPressed('up')) {
+		     		this.vel.y -= this.accel.x * me.timer.tick;
+		        		this.vel.x=0;
+		    	}  else if (me.input.isKeyPressed('down')) {
+		        		this.vel.y += this.accel.x * me.timer.tick;
+		        		this.vel.x=0;
+		    	} else {
+		        		this.vel.x = 0;
+		        		this.vel.y = 0;
+		    	}   
+				if(this.health <= 0)
+		        		this.alive = false;
+		    	if(this.pos.x<0)
+		    		this.pos.x = 0; 
+		    	if(this.pos.x>2500)
+		        		this.pos.x=2500;
+		    	if(this.pos.y<0)
+		        		this.pos.y = 0; 
+		    	if(this.pos.y>2350)
+		        		this.pos.y = 2350;
 
-        if(this.pos.x<0)
-            this.pos.x = 0; 
-        if(this.pos.x>2500)
-            this.pos.x=2500;
-        if(this.pos.y<0)
-            this.pos.y = 0; 
-        if(this.pos.y>2350)
-            this.pos.y = 2350;
+		    	//check & update player movement
+		    	this.updateMovement();
+		    	var res = me.game.collide(this);
+		    	if (res) {
+		        		// if we collide with an enemy
 
-        //check & update player movement
-        this.updateMovement();
-        var res = me.game.collide(this);
-        if (res) {
-            // if we collide with an enemy
-
-            if (res.obj.type == me.game.ENEMY_OBJECT && me.input.isKeyPressed('attack')) {
-                //this.renderable.flicker(45);
-                if(this.kills <= 50)
-                    this.convertRate = (9/100) * this.kills + 1 
-                else this.convertRate = (-0.10 * this.kills) + 11;
-                res.obj.health -= (2*this.convertRate);
-            }
-        }
-        if(this.health <= 0)
-            this.alive = false;
-
+		        		if (res.obj.type == me.game.ENEMY_OBJECT && me.input.isKeyPressed('attack')) {
+		            		//this.renderable.flicker(45);
+		            		if(this.kills <= 100)
+		                			this.convertRate = (9/100) * this.kills + 1 
+		            		else this.convertRate = (-0.01 * this.kills) + 11;
+		            			res.obj.health -= (0.5*this.convertRate);
+					console.log('The convert rate : ' + this.convertRate + ' and no of kills ' + this.kills);
+		        		}
+		    	}
+		}
         // update animation if necessary
         if (this.vel.x!=0 || this.vel.y!=0) {
-            // update object animation
-            this.parent();
-            return true;
+           	// update object animation
+			this.parent();
+			return true;
         }
          
         // else inform the engine we did not perform
         // any update (e.g. position, animation)
         return false;
-    }
+	}
 });
 
 /* --------------------------Converted Entity------------------------ */
@@ -162,6 +165,8 @@ game.ConvertedEntity = me.ObjectEntity.extend({
  
         // make it collidable
         this.health=50;
+	this.offset = 100*Math.random()-50 //Math.floor(Math.random()*50);
+	console.log('The offset '+this.offset);
        
     },
  
@@ -189,7 +194,7 @@ game.ConvertedEntity = me.ObjectEntity.extend({
         }
         if(obj.name == "zombie") {
             if (this.alive) {
-                obj.health -= 0.5*hero.convertRate;
+                obj.health -= 0.3*hero.convertRate;
                 //console.log(hero.convertRate);
             }
         }
@@ -228,8 +233,8 @@ game.ConvertedEntity = me.ObjectEntity.extend({
             var a = hero.pos.x;
             var b = hero.pos.y;
             var dist = Math.sqrt(Math.pow(hero.pos.x-this.pos.x,2)+Math.pow(hero.pos.y-this.pos.y,2));
-            var nx =  (hero.pos.x-this.pos.x)*1.0/dist;
-            var ny =  (hero.pos.y-this.pos.y)*1.0/dist;
+            var nx =  ((hero.pos.x-this.pos.x)+this.offset)*1.0/dist;
+            var ny =  ((hero.pos.y-this.pos.y)+this.offset)*1.0/dist;
 
             if(dist > 20)
             {
@@ -321,10 +326,10 @@ game.ZombieEntity = me.ObjectEntity.extend({
         if (res && this.alive ){
             for(var i = 0, len = res.length; i < len; i++) {
                 if(me.input.isKeyPressed('attack') && res[i].obj.name == "mainplayer") {
-                    hero.health -= 0.7*i;
+                    hero.health -= 0.8*i;
                 }
                 if(res[i].obj.name=="con") {
-                    res[i].obj.health -= 0.5;
+                    res[i].obj.health -= 0.7;
                 }    
             }
                
