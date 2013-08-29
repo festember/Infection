@@ -26,93 +26,10 @@
  </layer>
  <objectgroup name="entities" width="38" height="38">
   <object x="1792" y="256"/>
-  <object name="mainPlayer" x="1088" y="640" width="64" height="64">
+  <object name="mainPlayer" x="2304" y="2304" width="64" height="64">
    <properties>
     <property name="image" value="player"/>
     <property name="spriteheight" value="64"/>
-   </properties>
-   <ellipse/>
-  </object>
-  <object name="zombie" x="768" y="64" width="192" height="64">
-   <properties>
-    <property name="image" value="zombie"/>
-    <property name="spritewidth" value="64"/>
-   </properties>
-   <ellipse/>
-  </object>
-  <object name="zombie" x="128" y="128" width="192" height="64">
-   <properties>
-    <property name="image" value="zombie"/>
-    <property name="spritewidth" value="64"/>
-   </properties>
-   <ellipse/>
-  </object>
-  <object name="zombie" x="64" y="640" width="256" height="64">
-   <properties>
-    <property name="image" value="zombie"/>
-    <property name="spritewidth" value="64"/>
-   </properties>
-   <ellipse/>
-  </object>
-  <object name="zombie" x="704" y="448" width="128" height="64">
-   <properties>
-    <property name="image" value="zombie"/>
-    <property name="spritewidth" value="64"/>
-   </properties>
-   <ellipse/>
-  </object>
-  <object name="zombie" x="192" y="320" width="384" height="64">
-   <properties>
-    <property name="image" value="zombie"/>
-    <property name="spritewidth" value="64"/>
-   </properties>
-   <ellipse/>
-  </object>
-  <object name="vampire" x="768" y="256" width="384" height="64">
-   <properties>
-    <property name="spritewidth" value="64"/>
-   </properties>
-   <ellipse/>
-  </object>
-  <object name="zombie" x="448" y="128" width="192" height="64">
-   <properties>
-    <property name="image" value="zombie"/>
-    <property name="spritewidth" value="64"/>
-   </properties>
-   <ellipse/>
-  </object>
-  <object name="zombie" x="448" y="512" width="192" height="64">
-   <properties>
-    <property name="image" value="zombie"/>
-    <property name="spritewidth" value="64"/>
-   </properties>
-   <ellipse/>
-  </object>
-  <object name="zombie" x="640" y="640" width="192" height="64">
-   <properties>
-    <property name="image" value="zombie"/>
-    <property name="spritewidth" value="64"/>
-   </properties>
-   <ellipse/>
-  </object>
-  <object name="zombie" x="128" y="512" width="192" height="64">
-   <properties>
-    <property name="image" value="zombie"/>
-    <property name="spritewidth" value="64"/>
-   </properties>
-   <ellipse/>
-  </object>
-  <object name="zombie" x="640" y="768" width="192" height="64">
-   <properties>
-    <property name="image" value="zombie"/>
-    <property name="spritewidth" value="64"/>
-   </properties>
-   <ellipse/>
-  </object>
-  <object name="zombie" x="1216" y="896" width="384" height="64">
-   <properties>
-    <property name="image" value="zombie"/>
-    <property name="spritewidth" value="64"/>
    </properties>
    <ellipse/>
   </object>

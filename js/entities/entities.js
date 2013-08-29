@@ -22,7 +22,7 @@ game.PlayerEntity = me.ObjectEntity.extend({
         var percent = this.health / 500.0;
         var width = this.getCollisionBox().width*percent;
         context.fillStyle = 'blue';
-        context.fillRect(this.getCollisionBox().x, this.pos.y - 12, width, 10);
+        context.fillRect(this.getCollisionBox().x-16, this.pos.y - 12, width+32, 10);
       },
       getCollisionBox: function() {
         return {
@@ -36,7 +36,9 @@ game.PlayerEntity = me.ObjectEntity.extend({
 
     init: function(x, y, settings) {
         // call the constructor
-        settings.spritewidth = 64;
+        settings.spritewidth = 32;
+        settings.spriteheight = 64;
+        settings.image = "vampire";
         this.parent(x, y, settings);
         heroSettings = settings;
         // set the default horizontal & vertical speed (accel vector)
@@ -51,17 +53,26 @@ game.PlayerEntity = me.ObjectEntity.extend({
         this.mean = 80;
         this.collidabe = true;
         this.health = 500.0;
- 
+    
     },
  
     /* -----update the player pos------ */
     update: function() {
+        if(me.input.isKeyPressed('audio')) {
+            if(toggleAudio == 1) {
+                    me.audio.pause("horror");
+                    toggleAudio = 0;
+            } else {
+                me.audio.play("horror", true);
+                toggleAudio = 1;
+            }
+        }
         if (me.input.isKeyPressed('left')) {
-            this.flipX(false);  // unflip the sprite on horizontal axis
+            this.flipX(true);  // unflip the sprite on horizontal axis
             this.vel.x -= this.accel.x * me.timer.tick;
             this.vel.y=0;
         } else if (me.input.isKeyPressed('right')) {
-            this.flipX(true);   // flip the sprite
+            this.flipX(false);   // flip the sprite
             this.vel.x += this.accel.x * me.timer.tick;
             this.vel.y=0;
         } else if (me.input.isKeyPressed('up')) {
@@ -120,9 +131,9 @@ game.ConvertedEntity = me.ObjectEntity.extend({
         this.drawHealth(context);
       },
       drawHealth: function(context) {
-        var percent = this.health / 100;
+        var percent = this.health / 50;
         var width = this.getCollisionBox().width*percent;
-        context.fillStyle = 'green';
+        context.fillStyle = 'red';
         context.fillRect(this.getCollisionBox().x, this.pos.y - 12, width, 10);
       },
       getCollisionBox: function() {
@@ -137,8 +148,9 @@ game.ConvertedEntity = me.ObjectEntity.extend({
     init: function(x, y, settings) {
         // define this here instead of tiled
         settings.name="con";
-        settings.image = "werewolf";
-        
+        settings.image = "converted";
+        settings.spritewidth = 32;
+        settings.spriteheight = 64;
  
         // call the parent constructor
         this.parent(x, y, settings);
@@ -173,6 +185,11 @@ game.ConvertedEntity = me.ObjectEntity.extend({
                 this.pos.y += 64;
             }
         }
+        if(obj.name == "zombie") {
+            if (this.alive) {
+                obj.health-=hero.convertRate;
+            }
+        }
     },
  
     // manage the movement--should follow the player
@@ -180,20 +197,18 @@ game.ConvertedEntity = me.ObjectEntity.extend({
         // do nothing if not in viewport
         //if (!this.inViewport)
             //return false;
-        if(this.health <=0)
+        if(this.health <= 0)
         {
             this.alive = false;
             me.game.remove(this);
-        }
+        }/*
         var res = me.game.collide(this);
         if (res && res.obj.name=="zombie") {
             if (this.alive) {
                 res.obj.health-=hero.convertRate;
             }
-        }
+        }*/
         if (this.alive) {
-
-
             if (this.walkLeft && this.pos.x <= this.startX) {
                 this.walkLeft = false;
             } else if (!this.walkLeft && this.pos.x >= this.endX) {
@@ -201,18 +216,19 @@ game.ConvertedEntity = me.ObjectEntity.extend({
             }
             // make it walk
             this.flipX(!this.walkLeft);
-            //this.vel.x += (this.walkLeft) ? -this.accel.x * me.timer.tick : this.accel.x * me.timer.tick;
-                 
         } else {
             this.vel.x = 0;
+            this.vel.y = 0;
         }
         
         if(me.input.isKeyPressed('attract')) {
+            var a = hero.pos.x;
+            var b = hero.pos.y;
             var dist = Math.sqrt(Math.pow(hero.pos.x-this.pos.x,2)+Math.pow(hero.pos.y-this.pos.y,2));
             var nx =  (hero.pos.x-this.pos.x)*1.0/dist;
             var ny =  (hero.pos.y-this.pos.y)*1.0/dist;
 
-            if(dist > 10)
+            if(dist > 20)
             {
                 this.vel.x = nx*5;
                 this.vel.y = ny*5; 
@@ -285,11 +301,9 @@ game.ZombieEntity = me.ObjectEntity.extend({
     },
  
    
-    onCollision: function(res, obj) {
-        if (this.alive) {
-
-        }   
-    },
+    /*onCollision: function(res, obj) {
+        
+    },*/
  
     // manage the enemy movement
     update: function() {
@@ -305,7 +319,7 @@ game.ZombieEntity = me.ObjectEntity.extend({
             for(var i=0, len=res.length; i<len;i++){
                 if(me.input.isKeyPressed('attack') && res[i].obj.name=="mainplayer") {
                     hero.convertRate = (hero.Kill <= 40)? (9/80)*hero.Kill + 1 :(-0.07*hero.Kill) + 15.6 ;
-                    hero.health -= 0.2;
+                    hero.health -= 0.3;
                 }
                 if(res[i].obj.name=="con") {
                     res[i].obj.health-=hero.convertRate;
@@ -388,12 +402,12 @@ game.Brains = me.CollectableEntity.extend({
     }
 });
 
-/* --------------------------Werewolf Entity------------------------ */
+/* --------------------------Werewolf Entity------------------------ 
 game.WerewolfEntity = me.ObjectEntity.extend({
     init: function(x, y, settings) {
         // define this here instead of tiled
         settings.image = "werewolf";
-        settings.spritewidth = 64;
+        settings.spritewidth = 43;
  
         // call the parent constructor
         this.parent(x, y, settings);
@@ -438,7 +452,7 @@ game.WerewolfEntity = me.ObjectEntity.extend({
                     this.collidable = false;
                     this.alive = false;
                     me.game.HUD.updateItemValue("score", 250);
-                    console.log('KILLED ');
+                    //console.log('KILLED ');
                     game.persistent.opponent.attack = 0;
                     me.game.remove(this);
                 }       
@@ -477,15 +491,15 @@ game.WerewolfEntity = me.ObjectEntity.extend({
         }
         return false;
     }
-});
+});*/
 
 
-/* --------------------------Vampire Entity------------------------ */
+/* --------------------------Vampire Entity------------------------ 
 game.VampireEntity = me.ObjectEntity.extend({
     init: function(x, y, settings) {
         // define this here instead of tiled
         settings.image = "vampire";
-        settings.spritewidth = 64;
+        settings.spritewidth = 32;
  
         // call the parent constructor
         this.parent(x, y, settings);
@@ -568,7 +582,7 @@ game.VampireEntity = me.ObjectEntity.extend({
         }
         return false;
     }
-});
+});*/
 
 game.ScoreObject = me.HUD_Item.extend({
     init: function(x, y) {

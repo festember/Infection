@@ -15,17 +15,33 @@ game.PlayScreen = me.ScreenObject.extend({
 		
 		// make sure everyhting is in the right order
 		hero = me.game.getEntityByName("mainPlayer")[0];
+		toggleAudio = 1;
 		for(var i = 0; i < 200; i++) 
 		{
-			var con = new game.ZombieEntity(Math.floor(Math.random()*2250), Math.floor(Math.random()*2250), heroSettings);
+			var x = Math.floor(Math.random()*2250);
+			var y = Math.floor(Math.random()*2250);
+			while(x > 1150 && x < 2110 && y > 0 && y < 650)
+			{
+				x = Math.floor(Math.random()*2250);
+				y = Math.floor(Math.random()*2250);
+			}
+			var con = new game.ZombieEntity(x, y, heroSettings);
             me.game.add(con, 3);
 		}
 		for(var i = 0; i < 15; i++) 
 		{
-			var con = new game.Brains(Math.floor(Math.random()*2000), Math.floor(Math.random()*2000), heroSettings);
+			var x = Math.floor(Math.random()*2250);
+			var y = Math.floor(Math.random()*2250);
+			while(x > 1150 && x < 2110 && y > 0 && y < 650)
+			{
+				x = Math.floor(Math.random()*2250);
+				y = Math.floor(Math.random()*2250);
+			}
+			var con = new game.Brains(x, y, heroSettings);
             me.game.add(con, 3);
 		}
 		me.game.sort();
+		me.audio.play("horror", true);
 	},
 	
 	
