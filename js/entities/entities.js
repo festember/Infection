@@ -47,7 +47,7 @@ game.PlayerEntity = me.ObjectEntity.extend({
         // set the display to follow our position on both axis
         me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
 
-        this.Kill = 0;
+        this.kills = 0;
         this.convertRate = 0.0; 
         this.deviation = 850;
         this.mean = 80;
@@ -103,12 +103,14 @@ game.PlayerEntity = me.ObjectEntity.extend({
 
             if (res.obj.type == me.game.ENEMY_OBJECT && me.input.isKeyPressed('attack')) {
                 //this.renderable.flicker(45);
-                res.obj.health-=(2*this.convertRate);
-
-                this.convertRate = (1/1.414)*(1/Math.exp(Math.pow(this.Kill-this.mean,2)/(2*this.deviation)))*10
-                hero.convertRate = this.convertRate;  
+                if(this.kills <= 50)
+                    this.convertRate = (9/100) * this.kills + 1 
+                else this.convertRate = (-0.10 * this.kills) + 11;
+                res.obj.health -= (2*this.convertRate);
             }
         }
+        if(this.health <= 0)
+            this.alive = false;
 
         // update animation if necessary
         if (this.vel.x!=0 || this.vel.y!=0) {
@@ -170,7 +172,7 @@ game.ConvertedEntity = me.ObjectEntity.extend({
         // which mean at top position for this one
         if(obj.name == "con")
         {
-            var i = Math.floor(Math.random()*4)
+            /*var i = Math.floor(Math.random()*4)
             if(i == 0) {
                 this.pos.x -= 64;
                 this.pos.y -= 64;
@@ -183,11 +185,12 @@ game.ConvertedEntity = me.ObjectEntity.extend({
             } else {
                 this.pos.x += 64;
                 this.pos.y += 64;
-            }
+            } */
         }
         if(obj.name == "zombie") {
             if (this.alive) {
-                obj.health-=hero.convertRate;
+                obj.health -= 0.5*hero.convertRate;
+                //console.log(hero.convertRate);
             }
         }
     },
@@ -316,21 +319,20 @@ game.ZombieEntity = me.ObjectEntity.extend({
         
         var res = me.game.collide(this, true);
         if (res && this.alive ){
-            for(var i=0, len=res.length; i<len;i++){
-                if(me.input.isKeyPressed('attack') && res[i].obj.name=="mainplayer") {
-                    hero.convertRate = (hero.Kill <= 40)? (9/80)*hero.Kill + 1 :(-0.07*hero.Kill) + 15.6 ;
-                    hero.health -= 0.3;
+            for(var i = 0, len = res.length; i < len; i++) {
+                if(me.input.isKeyPressed('attack') && res[i].obj.name == "mainplayer") {
+                    hero.health -= 0.7*i;
                 }
                 if(res[i].obj.name=="con") {
-                    res[i].obj.health-=hero.convertRate;
+                    res[i].obj.health -= 0.5;
                 }    
             }
                
         }
-        if(this.health <=0) {
-            hero.Kill+=1;
+        if(this.health <= 0) {
+            hero.kills+=1;
             con = new game.ConvertedEntity(this.pos.x, this.pos.y, this.settings);
-            me.game.add(con, 4);
+            me.game.add(con, 3);
             me.game.sort();
             this.collidable = false;
             this.alive = false;
