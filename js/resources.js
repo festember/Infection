@@ -18,7 +18,7 @@ game.resources = [
     {name: "main", type: "tmx", src: "data/map/main.tmx"},
 
     //music
-    {name: "horror", type: "audio", src: "data/music/", channel : 1},
+//    {name: "horror", type: "audio", src: "data/music/", channel : 1},
     // game font
     //{name: "64x64_font", type: "image", src: "data/img/font/64x64_font.png"},
     {name: "32x32_font", type: "image", src: "data/img/font/32x32_font.png"}

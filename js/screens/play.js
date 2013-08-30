@@ -26,9 +26,9 @@ game.PlayScreen = me.ScreenObject.extend({
 				y = Math.floor(Math.random()*2250);
 			}
 			var con = new game.ZombieEntity(x, y, heroSettings);
-            me.game.add(con, 3);
+            		me.game.add(con, 3);
 		}
-		for(var i = 0; i < 7; i++) 
+		for(var i = 0; i < 5; i++) 
 		{
 			var x = Math.floor(Math.random()*2250);
 			var y = Math.floor(Math.random()*2250);
@@ -38,10 +38,10 @@ game.PlayScreen = me.ScreenObject.extend({
 				y = Math.floor(Math.random()*2250);
 			}
 			var con = new game.Brains(x, y, heroSettings);
-            me.game.add(con, 3);
+            		me.game.add(con, 3);
 		}
 		me.game.sort();
-		me.audio.play("horror", true);
+		//me.audio.play("horror", true);
 	},
 	
 	

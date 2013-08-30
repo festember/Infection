@@ -50,7 +50,7 @@ var game = {
         me.input.bindKey(me.input.KEY.X,     "attack");
         me.input.bindKey(me.input.KEY.A,     "attract");
         me.input.bindKey(me.input.KEY.Z,     "pick");
-        me.input.bindKey(me.input.KEY.P,     "audio");
+//        me.input.bindKey(me.input.KEY.P,     "audio");
 
 
         me.sys.gravity = 0;
