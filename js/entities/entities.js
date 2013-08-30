@@ -20,8 +20,8 @@ game.PlayerEntity = me.ObjectEntity.extend({
       drawHealth: function(context) {
         var percent = this.health / 500.0;
         var width = this.getCollisionBox().width*percent;
-        context.fillStyle = 'blue';
-        context.fillRect(this.getCollisionBox().x-16, this.pos.y - 12, width+32, 10);
+        context.fillStyle = 'black';
+        context.fillRect(this.getCollisionBox().x, this.pos.y - 12, width, 10);
       },
       getCollisionBox: function() {
         return {
@@ -196,8 +196,8 @@ game.ConvertedEntity = me.ObjectEntity.extend({
  
         // make it collidable
         this.health=50;
-	this.offset = 100*Math.random()-50 //Math.floor(Math.random()*50);
-	console.log('The offset '+this.offset);
+	this.offsety = 100*Math.random()-50; //Math.floor(Math.random()*50);
+	this.offsetx = 100*Math.random()-50;
        
     },
  
@@ -208,20 +208,11 @@ game.ConvertedEntity = me.ObjectEntity.extend({
         // which mean at top position for this one
         if(obj.name == "con")
         {
-            /*var i = Math.floor(Math.random()*4)
-            if(i == 0) {
-                this.pos.x -= 64;
-                this.pos.y -= 64;
-            } else if(i == 1) {
-                this.pos.x += 64;
-                this.pos.y -= 64;
-            } else if(i == 2) {
-                this.pos.x += 64;
-                this.pos.x -= 64;
-            } else {
-                this.pos.x += 64;
-                this.pos.y += 64;
-            } */
+		console.log('Colliding');
+		var horizontal = 50*Math.random()-25;
+		var vertical = 50*Math.random()-25;
+		this.pos.x += horizontal;
+		this.pos.y += vertical;
         }
         if(obj.type == me.game.ENEMY_OBJECT) {
             if (this.alive) {
@@ -262,11 +253,9 @@ game.ConvertedEntity = me.ObjectEntity.extend({
         }
         
         if(me.input.isKeyPressed('attract')) {
-            var a = hero.pos.x;
-            var b = hero.pos.y;
             var dist = Math.sqrt(Math.pow(hero.pos.x-this.pos.x,2)+Math.pow(hero.pos.y-this.pos.y,2));
-            var nx =  ((hero.pos.x-this.pos.x)+this.offset)*1.0/dist;
-            var ny =  ((hero.pos.y-this.pos.y)+this.offset)*1.0/dist;
+            var nx =  ((hero.pos.x-this.pos.x)+this.offsetx)*1.0/dist;
+            var ny =  ((hero.pos.y-this.pos.y)+this.offsety)*1.0/dist;
 
             if(dist > 20)
             {
@@ -277,6 +266,17 @@ game.ConvertedEntity = me.ObjectEntity.extend({
                 this.vel.y = 0;
             }
         }
+
+	if(me.input.isKeyPressed('explode')) {
+		var dist = Math.sqrt(Math.pow(hero.pos.x-this.pos.x,2)+Math.pow(hero.pos.y-this.pos.y,2));
+		if(dist<300)
+		{
+			var angle = 360 * Math.random();
+			this.vel.x = 10* Math.cos(angle) ;
+			this.vel.y = 10* Math.sin(angle);
+		
+		}
+	}
 
         if(this.pos.x<0)
             this.pos.x = 0; 
