@@ -33,8 +33,9 @@ var game = {
 
     // Run on game resources loaded.
     "loaded" : function () {
-        //me.state.set(me.state.MENU, new game.TitleScreen());
+        me.state.set(me.state.MENU, new game.TitleScreen());
         me.state.set(me.state.PLAY, new game.PlayScreen());
+        me.state.set(me.state.OVER, new game.GameOverScreen());
         // add our player entity in the entity pool
         me.entityPool.add("mainPlayer", game.PlayerEntity);
         me.entityPool.add("zombie", game.ZombieEntity);
@@ -50,11 +51,12 @@ var game = {
         me.input.bindKey(me.input.KEY.X,     "attack");
         me.input.bindKey(me.input.KEY.A,     "attract");
         me.input.bindKey(me.input.KEY.Z,     "pick");
-//        me.input.bindKey(me.input.KEY.P,     "audio");
+        me.input.bindKey(me.input.KEY.P,     "audio");
 
 
         me.sys.gravity = 0;
+
         // Start the game.
-        me.state.change(me.state.PLAY);
+        me.state.change(me.state.MENU);
     }
 };

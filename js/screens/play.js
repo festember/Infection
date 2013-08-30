@@ -14,34 +14,48 @@ game.PlayScreen = me.ScreenObject.extend({
 		//me.game.HUD.addItem("convRate", new game.ScoreObject(630, 30));
 		
 		// make sure everyhting is in the right order
+		startTime = me.timer.getTime();
+		endTime = undefined;
+		gameTime = undefined;
 		hero = me.game.getEntityByName("mainPlayer")[0];
 		toggleAudio = 1;
-		for(var i = 0; i < 200; i++) 
+		for(var i = 0; i < 100; i++) 
 		{
 			var x = Math.floor(Math.random()*2250);
 			var y = Math.floor(Math.random()*2250);
-			while(x > 1150 && x < 2110 && y > 0 && y < 650)
+			while(x > 1100 && x < 2110 && y > 0 && y < 700)
 			{
 				x = Math.floor(Math.random()*2250);
 				y = Math.floor(Math.random()*2250);
 			}
-			var con = new game.ZombieEntity(x, y, heroSettings);
-            		me.game.add(con, 3);
+			var ze = new game.ZombieEntity(x, y, heroSettings);
+            		me.game.add(ze, 3);
+		}
+		for(var i = 0; i < 150; i++) 
+		{
+			var x = Math.floor(Math.random()*2250);
+			var y = Math.floor(Math.random()*2250);
+			while(x > 1100 && x < 2110 && y > 0 && y < 700)
+			{
+				x = Math.floor(Math.random()*2250);
+				y = Math.floor(Math.random()*2250);
+			}
+			var we = new game.WerewolfEntity(x, y, heroSettings);
+           		 me.game.add(we, 3);
 		}
 		for(var i = 0; i < 5; i++) 
 		{
 			var x = Math.floor(Math.random()*2250);
 			var y = Math.floor(Math.random()*2250);
-			while(x > 1150 && x < 2110 && y > 0 && y < 650)
+			while(x > 1100 && x < 2110 && y > 0 && y < 700)
 			{
 				x = Math.floor(Math.random()*2250);
 				y = Math.floor(Math.random()*2250);
 			}
-			var con = new game.Brains(x, y, heroSettings);
-            		me.game.add(con, 3);
+			var bl = new game.Blood(x, y, heroSettings);
+            		me.game.add(bl, 3);
 		}
 		me.game.sort();
-		//me.audio.play("horror", true);
 	},
 	
 	
