@@ -1,38 +1,8 @@
 /*-------------------Player Entity-------------------------------- */
-game.persistent = {
-    player: {
-        signal : 0,
-        
-    },
-    opponent: {
-        attack : 0,
-        help : 0,
-    },
-};
-
 var hero  = undefined;
 var heroSettings = undefined;
 game.PlayerEntity = me.ObjectEntity.extend({
-    draw: function(context, rect) {
-        this.parent(context, rect);
-        this.drawHealth(context);
-      },
-      drawHealth: function(context) {
-        var percent = this.health / 500.0;
-        var width = this.getCollisionBox().width*percent;
-        context.fillStyle = 'black';
-        context.fillRect(this.getCollisionBox().x, this.pos.y - 12, width, 10);
-      },
-      getCollisionBox: function() {
-        return {
-          x: this.pos.x + this.collisionBox.colPos.x,
-          y: this.pos.y + this.collisionBox.colPos.y,
-          width: this.collisionBox.width,
-          height: this.collisionBox.height
-        };
-      }, 
     /* -----constructor------ */
-
     init: function(x, y, settings) {
         // call the constructor
         settings.spritewidth = 32;
@@ -53,8 +23,29 @@ game.PlayerEntity = me.ObjectEntity.extend({
         this.mean = 80;
         this.collidabe = true;
         this.health = 500.0;
+        this.gameTime = 0.0;
     },
- 
+
+    draw: function(context, rect) {
+        this.parent(context, rect);
+        this.drawHealth(context);
+    },
+
+    drawHealth: function(context) {
+        var percent = this.health / 500.0;
+        var width = this.getCollisionBox().width*percent;
+        context.fillStyle = 'black';
+        context.fillRect(this.getCollisionBox().x, this.pos.y - 12, width, 10);
+    },
+
+    getCollisionBox: function() {
+        return {
+          x: this.pos.x + this.collisionBox.colPos.x,
+          y: this.pos.y + this.collisionBox.colPos.y,
+          width: this.collisionBox.width,
+          height: this.collisionBox.height
+        };
+    }, 
     /* -----update the player pos------ */
     update: function() {
 	    /*
@@ -103,21 +94,20 @@ game.PlayerEntity = me.ObjectEntity.extend({
             var res = me.game.collide(this);
             if (res) {
                 // if we collide with an enemy
-
                 if (res.obj.type == me.game.ENEMY_OBJECT && me.input.isKeyPressed('attack')) {
                     //this.renderable.flicker(45);
                     if(this.kills <= 100)
-                            this.convertRate = (9/100) * this.kills + 1 
-                    else this.convertRate = (-0.01 * this.kills) + 11;
+                            this.convertRate = (0.05 * this.kills) + 1 
+                    else this.convertRate = (1400-(this.kills*5))/150;
                         res.obj.health -= (0.5*this.convertRate);
-                    //console.log('The convert rate : ' + this.convertRate + ' and no of kills ' + this.kills);
                 }
             }
 
             if(this.health <= 0) {
                 this.alive = false;
                 endTime = me.timer.getTime();
-                gameTime = endTime-startTime;
+                gameTime = (endTime-startTime)/60000; //time is in minutes
+                fin = me.game.HUD.HUDItems.score;
                 me.state.change(me.state.OVER);
             }
 
@@ -161,26 +151,6 @@ game.Blood = me.CollectableEntity.extend({
 
 /* --------------------------Converted Entity------------------------ */
 game.ConvertedEntity = me.ObjectEntity.extend({
-
-    draw: function(context, rect) {
-        this.parent(context, rect);
-        this.drawHealth(context);
-      },
-      drawHealth: function(context) {
-        var percent = this.health / 50;
-        var width = this.getCollisionBox().width*percent;
-        context.fillStyle = 'red';
-        context.fillRect(this.getCollisionBox().x, this.pos.y - 12, width, 10);
-      },
-      getCollisionBox: function() {
-        return {
-          x: this.pos.x + this.collisionBox.colPos.x,
-          y: this.pos.y + this.collisionBox.colPos.y,
-          width: this.collisionBox.width,
-          height: this.collisionBox.height
-        };
-      },
-  
     init: function(x, y, settings) {
         // define this here instead of tiled
         settings.name="con";
@@ -196,9 +166,27 @@ game.ConvertedEntity = me.ObjectEntity.extend({
  
         // make it collidable
         this.health=50;
-	this.offsety = 100*Math.random()-50; //Math.floor(Math.random()*50);
-	this.offsetx = 100*Math.random()-50;
-       
+        this.offsety = 100*Math.random()-50; //Math.floor(Math.random()*50);
+        this.offsetx = 100*Math.random()-50;
+    },
+
+    draw: function(context, rect) {
+        this.parent(context, rect);
+        this.drawHealth(context);
+    },
+    drawHealth: function(context) {
+        var percent = this.health / 50;
+        var width = this.getCollisionBox().width*percent;
+        context.fillStyle = 'red';
+        context.fillRect(this.getCollisionBox().x, this.pos.y - 12, width, 10);
+    },
+    getCollisionBox: function() {
+        return {
+            x: this.pos.x + this.collisionBox.colPos.x,
+            y: this.pos.y + this.collisionBox.colPos.y,
+            width: this.collisionBox.width,
+            height: this.collisionBox.height
+        };
     },
  
     // call by the engine when colliding with another object
@@ -208,16 +196,14 @@ game.ConvertedEntity = me.ObjectEntity.extend({
         // which mean at top position for this one
         if(obj.name == "con")
         {
-		console.log('Colliding');
-		var horizontal = 50*Math.random()-25;
-		var vertical = 50*Math.random()-25;
-		this.pos.x += horizontal;
-		this.pos.y += vertical;
+    		var horizontal = 50*Math.random()-25;
+    		var vertical = 50*Math.random()-25;
+    		this.pos.x += horizontal;
+    		this.pos.y += vertical;
         }
         if(obj.type == me.game.ENEMY_OBJECT) {
             if (this.alive) {
                 obj.health -= 0.3*hero.convertRate;
-                //console.log(hero.convertRate);
             }
         }
     },
@@ -231,8 +217,11 @@ game.ConvertedEntity = me.ObjectEntity.extend({
         {
             this.alive = false;
             hero.convertsAlive-=1;
+            me.game.HUD.updateItemValue("score", -100);
             me.game.remove(this);
-        }/*
+        }
+        if(this.kills)
+        /*
         var res = me.game.collide(this);
         if (res && res.obj.name=="zombie") {
             if (this.alive) {
@@ -267,16 +256,15 @@ game.ConvertedEntity = me.ObjectEntity.extend({
             }
         }
 
-	if(me.input.isKeyPressed('explode')) {
-		var dist = Math.sqrt(Math.pow(hero.pos.x-this.pos.x,2)+Math.pow(hero.pos.y-this.pos.y,2));
-		if(dist<300)
-		{
-			var angle = 360 * Math.random();
-			this.vel.x = 10* Math.cos(angle) ;
-			this.vel.y = 10* Math.sin(angle);
-		
-		}
-	}
+    	if(me.input.isKeyPressed('explode')) {
+    		var dist = Math.sqrt(Math.pow(hero.pos.x-this.pos.x,2)+Math.pow(hero.pos.y-this.pos.y,2));
+    		if(dist<300)
+    		{
+    			var angle = 360 * Math.random();
+    			this.vel.x = 10* Math.cos(angle) ;
+    			this.vel.y = 10* Math.sin(angle);
+    		}
+    	}
 
         if(this.pos.x<0)
             this.pos.x = 0; 
@@ -302,25 +290,6 @@ game.ConvertedEntity = me.ObjectEntity.extend({
 
 /* --------------------------Zombie Entity------------------------ */
 game.ZombieEntity = me.ObjectEntity.extend({
-    draw: function(context, rect) {
-        this.parent(context, rect);
-        this.drawHealth(context);
-      },
-      drawHealth: function(context) {
-        var percent = this.health / 100;
-        var width = this.getCollisionBox().width*percent;
-        context.fillStyle = 'green';
-        context.fillRect(this.getCollisionBox().x, this.pos.y - 12, width, 10);
-      },
-      getCollisionBox: function() {
-        return {
-          x: this.pos.x + this.collisionBox.colPos.x,
-          y: this.pos.y + this.collisionBox.colPos.y,
-          width: this.collisionBox.width,
-          height: this.collisionBox.height
-        };
-      },
-  
     init: function(x, y, settings) {
 
         this.maxFrames = 60+Math.floor(Math.random()*60);
@@ -338,14 +307,36 @@ game.ZombieEntity = me.ObjectEntity.extend({
         this.attack = 1;
         this.health = 100;
     },
- 
-   
+    
+    draw: function(context, rect) {
+        this.parent(context, rect);
+        this.drawHealth(context);
+    },
+
+    drawHealth: function(context) {
+        var percent = this.health / 100;
+        var width = this.getCollisionBox().width*percent;
+        context.fillStyle = 'green';
+        context.fillRect(this.getCollisionBox().x, this.pos.y - 12, width, 10);
+    },
+
+    getCollisionBox: function() {
+        return {
+          x: this.pos.x + this.collisionBox.colPos.x,
+          y: this.pos.y + this.collisionBox.colPos.y,
+          width: this.collisionBox.width,
+          height: this.collisionBox.height
+        };
+    },
+
     /*onCollision: function(res, obj) {
         
     },*/
  
     // manage the enemy movement
     update: function() {
+        if (!this.inViewport)
+            return false;
 
         this.frameCounter++;
         if(this.frameCounter/this.maxFrames > 1.0){
@@ -376,10 +367,6 @@ game.ZombieEntity = me.ObjectEntity.extend({
             me.game.HUD.updateItemValue("score", 250);
             me.game.remove(this);
         }   
-        
-        // do nothing if not in viewport
-        if (!this.inViewport)
-            return false;
  
         if (this.alive) {
             this.walkLeft = (this.vel.x<0)? true:false;
@@ -423,25 +410,6 @@ game.ZombieEntity = me.ObjectEntity.extend({
 
 // --------------------------Werewolf Entity------------------------ 
 game.WerewolfEntity = me.ObjectEntity.extend({
-    draw: function(context, rect) {
-        this.parent(context, rect);
-        this.drawHealth(context);
-      },
-      drawHealth: function(context) {
-        var percent = this.health / 100;
-        var width = this.getCollisionBox().width*percent;
-        context.fillStyle = 'green';
-        context.fillRect(this.getCollisionBox().x, this.pos.y - 12, width, 10);
-      },
-      getCollisionBox: function() {
-        return {
-          x: this.pos.x + this.collisionBox.colPos.x,
-          y: this.pos.y + this.collisionBox.colPos.y,
-          width: this.collisionBox.width,
-          height: this.collisionBox.height
-        };
-      },
-  
     init: function(x, y, settings) {
 
         this.maxFrames = 60+Math.floor(Math.random()*60);
@@ -459,7 +427,27 @@ game.WerewolfEntity = me.ObjectEntity.extend({
         this.attack = 1;
         this.health = 100;
     },
- 
+
+    draw: function(context, rect) {
+        this.parent(context, rect);
+        this.drawHealth(context);
+    },
+
+    drawHealth: function(context) {
+        var percent = this.health / 100;
+        var width = this.getCollisionBox().width*percent;
+        context.fillStyle = 'green';
+        context.fillRect(this.getCollisionBox().x, this.pos.y - 12, width, 10);
+    },
+
+    getCollisionBox: function() {
+        return {
+          x: this.pos.x + this.collisionBox.colPos.x,
+          y: this.pos.y + this.collisionBox.colPos.y,
+          width: this.collisionBox.width,
+          height: this.collisionBox.height
+        };
+    },
    
     /*onCollision: function(res, obj) {
         
@@ -493,7 +481,7 @@ game.WerewolfEntity = me.ObjectEntity.extend({
             me.game.sort();
             this.collidable = false;
             this.alive = false;
-            me.game.HUD.updateItemValue("score", 250);
+            me.game.HUD.updateItemValue("score", 300);
             me.game.remove(this);
         }   
         
@@ -544,87 +532,117 @@ game.WerewolfEntity = me.ObjectEntity.extend({
 
 /* --------------------------Vampire Entity------------------------ 
 game.VampireEntity = me.ObjectEntity.extend({
+    draw: function(context, rect) {
+        this.parent(context, rect);
+        this.drawHealth(context);
+      },
+      drawHealth: function(context) {
+        var percent = this.health / 100;
+        var width = this.getCollisionBox().width*percent;
+        context.fillStyle = 'green';
+        context.fillRect(this.getCollisionBox().x, this.pos.y - 12, width, 10);
+      },
+      getCollisionBox: function() {
+        return {
+          x: this.pos.x + this.collisionBox.colPos.x,
+          y: this.pos.y + this.collisionBox.colPos.y,
+          width: this.collisionBox.width,
+          height: this.collisionBox.height
+        };
+      },
+  
     init: function(x, y, settings) {
-        // define this here instead of tiled
-        settings.image = "vampire";
-        settings.spritewidth = 32;
- 
-        // call the parent constructor
+
+        this.maxFrames = 60+Math.floor(Math.random()*60);
+        this.frameCounter=this.maxFrames;
+        settings.name = "werewolf";
+        settings.image = "werewolf";
+        settings.spritewidth = 50;
+        this.settings = settings;
         this.parent(x, y, settings);
- 
-        this.startX = x;
-        this.endX = x + settings.width - settings.spritewidth;
-        // size of sprite
- 
-        // make him start from the right
         this.pos.x = x + settings.width - settings.spritewidth;
         this.walkLeft = true;
- 
-        // walking & jumping speed
-        this.setVelocity(1, 1);
- 
-        // make it collidable
+        this.setVelocity(3, 3);
         this.collidable = true;
-        // make it a enemy object
         this.type = me.game.ENEMY_OBJECT;
- 
+        this.attack = 1;
+        this.health = 100;
     },
  
-    // call by the engine when colliding with another object
-    // obj parameter corresponds to the other object (typically the player) touching this one
-    onCollision: function(res, obj) {
- 
-        // res.y >0 means touched by something on the bottom
-        // which mean at top position for this one
-        if (this.alive) {
-            if(me.input.isKeyPressed('attack')) 
-            {
-                game.persistent.opponent.help = 1;
-                game.persistent.opponent.attack = 1;
-                hero.convertRate = (-0.9/20)*hero.Kill + 1;
-                
-                this.health-=(2*hero.convertRate);
-                    if(this.health <=0){
-                    hero.Kill+=1;
-                    //me.game.add()
-                    //this.renderable.flicker(45);
-                    this.collidable = false;
-                    this.alive = false;
-
-                    me.game.HUD.updateItemValue("score", 250);
-                    console.log('KILLED ');
-                    game.persistent.opponent.attack = 0;
-                    me.game.remove(this);
-                }       
-            }
-        }
+   
+    /*onCollision: function(res, obj) {
+        
     },
  
     // manage the enemy movement
     update: function() {
+
+        this.frameCounter++;
+        if(this.frameCounter/this.maxFrames > 1.0){
+            this.frameCounter = 0;
+            this.anglex = Math.floor(Math.random()*360);
+        }
+        
+        var res = me.game.collide(this, true);
+        if (res && this.alive ){
+            for(var i = 0, len = res.length; i < len; i++) {
+                if(me.input.isKeyPressed('attack') && res[i].obj.name == "mainplayer") {
+                    hero.health -= 0.9*i;
+                }
+                if(res[i].obj.name=="con") {
+                    res[i].obj.health -= 0.7;
+                }    
+            }
+               
+        }
+        if(this.health <= 0) {
+            hero.kills+=1;
+            con = new game.ConvertedEntity(this.pos.x, this.pos.y, this.settings);
+            me.game.add(con, 3);
+            me.game.sort();
+            this.collidable = false;
+            this.alive = false;
+            me.game.HUD.updateItemValue("score", 300);
+            me.game.remove(this);
+        }   
+        
         // do nothing if not in viewport
         if (!this.inViewport)
             return false;
  
         if (this.alive) {
-            if (this.walkLeft && this.pos.x <= this.startX) {
-                this.walkLeft = false;
-            } else if (!this.walkLeft && this.pos.x >= this.endX) {
-                this.walkLeft = true;
+            this.walkLeft = (this.vel.x<0)? true:false;
+                
+
+            this.flipX(!this.walkLeft);
+
+            var dist = Math.sqrt(Math.pow(hero.pos.x-this.pos.x,2)+Math.pow(hero.pos.y-this.pos.y,2));
+
+            if (me.input.isKeyPressed('attack')) {
+                if(dist<300) {
+                    var nx =  (hero.pos.x-this.pos.x)*1.0/dist;
+                    var ny =  (hero.pos.y-this.pos.y)*1.0/dist;
+                    this.vel.x = nx*5;
+                    this.vel.y = ny*5; 
+                }
             }
-            // make it walk
-            this.flipX(this.walkLeft);
-            this.vel.x += (this.walkLeft) ? -this.accel.x * me.timer.tick : this.accel.x * me.timer.tick;
-        } else {
-            this.vel.x = 0;
-        }
-         
-        // check and update movement
+            else{
+                this.vel.x = Math.cos(this.anglex)*5;
+                this.vel.y = Math.sin(this.anglex)*5;
+            }
+            if(this.pos.x<0)
+                this.pos.x = 0; 
+            if(this.pos.x>2500)
+                this.pos.x=2500;
+            if(this.pos.y<0)
+                this.pos.y = 0; 
+            if(this.pos.y>2350)
+                this.pos.y = 2350;  
+        } 
+
         this.updateMovement();
-         
-        // update animation if necessary
+
         if (this.vel.x!=0 || this.vel.y!=0) {
-            // update object animation
             this.parent();
             return true;
         }

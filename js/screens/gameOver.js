@@ -6,6 +6,7 @@ game.GameOverScreen = me.ScreenObject.extend({
         // title screen image
         this.title = null;
         this.font = null;
+        ch = null;
     },
  
     // reset function
@@ -16,7 +17,14 @@ game.GameOverScreen = me.ScreenObject.extend({
             // font to display the menu items
             this.font = new me.BitmapFont("32x32_font", 32);
         }
- 
+        if(fin.value > 62500) {
+            ch = true;
+            fin.value = 0;
+        }
+        if(hero.kills > 200 && hero.gameTime < 4.0) {
+            ch = true;
+            fin.value = 0;
+        }
         // enable the keyboard
         //me.input.bindKey(me.input.KEY.ENTER, "enter", true);
         // play something
@@ -34,7 +42,14 @@ game.GameOverScreen = me.ScreenObject.extend({
     // draw function
     draw: function(context) {
         context.drawImage(this.title, 0, 0);
-        this.font.draw(context, "Score: ", 100, 920);
+        if(ch)
+        {
+            //fin.value = 0;
+            this.font.draw(context, "DONT CHEAT ASSHOLE", 100, 920);
+            //this.font.draw(context, "SCORE: " + fin.value, 100, 920);
+        } else {
+            this.font.draw(context, "SCORE: " + fin.value, 100, 920);
+        }
     },
  
     // destroy function

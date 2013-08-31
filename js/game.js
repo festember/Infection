@@ -10,11 +10,11 @@ var game = {
         }
 		
 		// add "#debug" to the URL to enable the debug Panel
-		if (document.location.hash === "#debug") {
+		/*if (document.location.hash === "#debug") {
 			window.onReady(function () {
 				me.plugin.register.defer(debugPanel, "debug");
 			});
-		}
+		}*/
 
         // Initialize the audio.
         me.audio.init("mp3");
@@ -52,7 +52,7 @@ var game = {
         me.input.bindKey(me.input.KEY.A,     "attract");
         me.input.bindKey(me.input.KEY.Z,     "pick");
         me.input.bindKey(me.input.KEY.P,     "audio");
-	me.input.bindKey(me.input.KEY.C,     "explode");
+        me.input.bindKey(me.input.KEY.C,     "explode");
 
 
         me.sys.gravity = 0;
