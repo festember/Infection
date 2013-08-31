@@ -34,7 +34,7 @@ game.PlayerEntity = me.ObjectEntity.extend({
     drawHealth: function(context) {
         var percent = this.health / 500.0;
         var width = this.getCollisionBox().width*percent;
-        context.fillStyle = 'black';
+        context.fillStyle = 'red';
         context.fillRect(this.getCollisionBox().x, this.pos.y - 12, width, 10);
     },
 
@@ -48,7 +48,6 @@ game.PlayerEntity = me.ObjectEntity.extend({
     }, 
     /* -----update the player pos------ */
     update: function() {
-	    /*
         if(me.input.isKeyPressed('audio')) {
             if(toggleAudio == 1) {
                     me.audio.pause("horror");
@@ -58,7 +57,6 @@ game.PlayerEntity = me.ObjectEntity.extend({
                 toggleAudio = 1;
             }
         }
-	*/
 		if(this.alive) {
 			if (me.input.isKeyPressed('left')) {
         		this.flipX(true);  // unflip the sprite on horizontal axis
@@ -103,10 +101,10 @@ game.PlayerEntity = me.ObjectEntity.extend({
                 }
             }
 
-            if(this.health <= 0) {
+            if(this.health <= 0 || this.kills == 250) {
                 this.alive = false;
                 endTime = me.timer.getTime();
-                gameTime = (endTime-startTime)/60000; //time is in minutes
+                //gameTime = (endTime-startTime)/60000; //time is in minutes
                 fin = me.game.HUD.HUDItems.score;
                 me.state.change(me.state.OVER);
             }
@@ -177,7 +175,7 @@ game.ConvertedEntity = me.ObjectEntity.extend({
     drawHealth: function(context) {
         var percent = this.health / 50;
         var width = this.getCollisionBox().width*percent;
-        context.fillStyle = 'red';
+        context.fillStyle = 'blue';
         context.fillRect(this.getCollisionBox().x, this.pos.y - 12, width, 10);
     },
     getCollisionBox: function() {

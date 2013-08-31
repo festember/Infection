@@ -21,10 +21,10 @@ game.GameOverScreen = me.ScreenObject.extend({
             ch = true;
             fin.value = 0;
         }
-        if(hero.kills > 200 && hero.gameTime < 4.0) {
+        /*if(hero.kills > 200 && hero.gameTime < 4.0) {
             ch = true;
             fin.value = 0;
-        }
+        }*/
         // enable the keyboard
         //me.input.bindKey(me.input.KEY.ENTER, "enter", true);
         // play something
