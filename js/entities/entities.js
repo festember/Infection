@@ -32,10 +32,10 @@ game.PlayerEntity = me.ObjectEntity.extend({
     },
 
     drawHealth: function(context) {
-        var percent = this.health / 500.0;
+        var percent = this.health / 300.0;
         var width = this.getCollisionBox().width*percent;
-        context.fillStyle = 'red';
-        context.fillRect(this.getCollisionBox().x, this.pos.y - 12, width, 10);
+        context.fillStyle = 'gold';
+        context.fillRect(this.getCollisionBox().x-10, this.pos.y - 12, width, 10);
     },
 
     getCollisionBox: function() {
@@ -175,7 +175,7 @@ game.ConvertedEntity = me.ObjectEntity.extend({
     drawHealth: function(context) {
         var percent = this.health / 50;
         var width = this.getCollisionBox().width*percent;
-        context.fillStyle = 'blue';
+        context.fillStyle = 'silver';
         context.fillRect(this.getCollisionBox().x, this.pos.y - 12, width, 10);
     },
     getCollisionBox: function() {
@@ -314,7 +314,7 @@ game.ZombieEntity = me.ObjectEntity.extend({
     drawHealth: function(context) {
         var percent = this.health / 100;
         var width = this.getCollisionBox().width*percent;
-        context.fillStyle = 'green';
+        context.fillStyle = 'blue';
         context.fillRect(this.getCollisionBox().x, this.pos.y - 12, width, 10);
     },
 
@@ -434,7 +434,7 @@ game.WerewolfEntity = me.ObjectEntity.extend({
     drawHealth: function(context) {
         var percent = this.health / 100;
         var width = this.getCollisionBox().width*percent;
-        context.fillStyle = 'green';
+        context.fillStyle = 'red';
         context.fillRect(this.getCollisionBox().x, this.pos.y - 12, width, 10);
     },
 

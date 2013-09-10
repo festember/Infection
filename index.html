@@ -10,7 +10,6 @@
     <body>
         <!-- Canvas placeholder -->
 		<div id="screen"></div>
-        
 		<!-- melonJS Library -->
 		<script type="text/javascript" src="lib/melonJS-0.9.7.js"></script>
         
@@ -32,7 +31,6 @@
 		<script type="text/javascript">
 			window.onReady(function onReady() {
 				game.onload();
-
 				// Mobile browser hacks
 				if (me.sys.isMobile && !navigator.isCocoonJS) {
 					// Prevent the webview from moving on a swipe
@@ -61,5 +59,8 @@
 				}
 			});
 		</script>
+		<div id="ins"><p><b>Instructions:</b><hr>Arrow keys to move<br>Hold X to attack<br>Press Z to pickup blood bags<br>
+			Hold A to call converted entities<br>Press C to scatter your army<br>P to control audio
+		</p></div>
     </body>
 </html>

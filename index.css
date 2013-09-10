@@ -17,6 +17,13 @@ body {
     margin: 0;
 }
 
+#ins {
+    margin: auto;
+    position: absolute;
+    right: 5%;
+    top: 0%;
+}
+
 #screen canvas {
     margin: auto;
 
@@ -30,4 +37,9 @@ body {
 	image-rendering: -webkit-optimize-contrast;
 	image-rendering: optimize-contrast;
 	-ms-interpolation-mode: nearest-neighbor;
+}
+
+#screen {
+    position: absolute;
+    left: 13%;
 }
