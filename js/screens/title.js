@@ -2,7 +2,6 @@ game.TitleScreen = me.ScreenObject.extend({
 	// constructor
     init: function() {
         this.parent(true);
- 
         // title screen image
         this.title = null;
         this.font = null;

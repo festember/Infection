@@ -4,8 +4,60 @@
 		"selected_items":
 		[
 			[
+				"game",
+				"gameTime"
+			],
+			[
+				"S",
+				"ScreenObject"
+			],
+			[
+				"conver",
+				"convertsAlive"
+			],
+			[
+				"con",
+				"console"
+			],
+			[
+				"conv",
+				"convertRate"
+			],
+			[
+				"to",
+				"toggleAudio"
+			],
+			[
 				"sp",
+				"spriteheight"
+			],
+			[
+				"in",
+				"input"
+			],
+			[
+				"b",
+				"bindKey"
+			],
+			[
+				"re",
+				"remove"
+			],
+			[
+				"col",
+				"collidable"
+			],
+			[
+				"sprite",
 				"spritewidth"
+			],
+			[
+				"e",
+				"entityPool"
+			],
+			[
+				"were",
+				"werewolf"
 			],
 			[
 				"Player",
@@ -35,7 +87,7 @@
 			"file": "js/resources.js",
 			"settings":
 			{
-				"buffer_size": 827,
+				"buffer_size": 1127,
 				"line_ending": "Unix"
 			}
 		},
@@ -43,23 +95,7 @@
 			"file": "js/entities/entities.js",
 			"settings":
 			{
-				"buffer_size": 20459,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "js/game.js",
-			"settings":
-			{
-				"buffer_size": 1803,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "js/screens/play.js",
-			"settings":
-			{
-				"buffer_size": 704,
+				"buffer_size": 20870,
 				"line_ending": "Unix"
 			}
 		},
@@ -67,7 +103,31 @@
 			"file": "js/screens/title.js",
 			"settings":
 			{
-				"buffer_size": 271,
+				"buffer_size": 1139,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/game.js",
+			"settings":
+			{
+				"buffer_size": 2098,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/Rohan/Documents/Code/JavaScript/Infection/js/screens/gameOver.js",
+			"settings":
+			{
+				"buffer_size": 1609,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/screens/play.js",
+			"settings":
+			{
+				"buffer_size": 1918,
 				"line_ending": "Unix"
 			}
 		}
@@ -108,6 +168,9 @@
 	},
 	"file_history":
 	[
+		"/Users/Rohan/Downloads/Brainstorm/brainstorm.html",
+		"/Users/Rohan/Documents/Code/JavaScript/Infection/lib/melonJS-0.9.7.js",
+		"/Users/Rohan/Documents/Code/JavaScript/Infection/index.html",
 		"/Users/Rohan/Documents/CODE/JavaScript/Infection/js/entities/entities.js",
 		"/Users/Rohan/Documents/Code/JavaScript/rsinha.me/README.md",
 		"/Users/Rohan/Documents/CODE/JavaScript/Infection/js/game.js",
@@ -222,6 +285,43 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"face",
+			"fb",
+			"face",
+			"hero.kills",
+			"Convert",
+			"Convert	",
+			"black",
+			"devug",
+			"debug",
+			"poke",
+			"console",
+			"attack",
+			"help",
+			"signal",
+			"help",
+			"attack",
+			"Kill",
+			"kill",
+			"convert",
+			"MENU",
+			"Conver",
+			"Conv",
+			"zombie",
+			"console",
+			"console.log",
+			"kill",
+			"Kill",
+			"kill",
+			"convertRate",
+			"hero.health",
+			"zombie",
+			"hero.health",
+			"hero",
+			"converted",
+			"hero.health",
+			"hero.con",
+			"her.con",
 			"angleTo",
 			"space",
 			"log",
@@ -249,6 +349,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"kills",
 			"convertRate",
 			"&#39"
 		],
@@ -261,7 +362,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -269,15 +370,15 @@
 					"file": "js/resources.js",
 					"settings":
 					{
-						"buffer_size": 827,
+						"buffer_size": 1127,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								825,
-								827
+								18,
+								18
 							]
 						],
 						"settings":
@@ -297,15 +398,15 @@
 					"file": "js/entities/entities.js",
 					"settings":
 					{
-						"buffer_size": 20459,
+						"buffer_size": 20870,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								398,
-								398
+								3688,
+								3688
 							]
 						],
 						"settings":
@@ -322,10 +423,10 @@
 				},
 				{
 					"buffer": 2,
-					"file": "js/game.js",
+					"file": "js/screens/title.js",
 					"settings":
 					{
-						"buffer_size": 1803,
+						"buffer_size": 1139,
 						"regions":
 						{
 						},
@@ -347,21 +448,83 @@
 						"zoom_level": 1.0
 					},
 					"type": "text"
-				},
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
 				{
 					"buffer": 3,
-					"file": "js/screens/play.js",
+					"file": "js/game.js",
 					"settings":
 					{
-						"buffer_size": 704,
+						"buffer_size": 2098,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								257,
-								260
+								483,
+								483
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 289.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/Users/Rohan/Documents/Code/JavaScript/Infection/js/screens/gameOver.js",
+					"settings":
+					{
+						"buffer_size": 1609,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								621,
+								621
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 93.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "js/screens/play.js",
+					"settings":
+					{
+						"buffer_size": 1918,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								313,
+								313
 							]
 						],
 						"settings":
@@ -371,34 +534,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "js/screens/title.js",
-					"settings":
-					{
-						"buffer_size": 271,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								270,
-								270
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 22.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -423,11 +559,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.532405860071,
 			1.0
 		],
 		"rows":

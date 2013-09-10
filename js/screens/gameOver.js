@@ -25,6 +25,7 @@ game.GameOverScreen = me.ScreenObject.extend({
             ch = true;
             fin.value = 0;
         }*/
+        
         // enable the keyboard
         //me.input.bindKey(me.input.KEY.ENTER, "enter", true);
         // play something
@@ -45,7 +46,7 @@ game.GameOverScreen = me.ScreenObject.extend({
         if(ch)
         {
             //fin.value = 0;
-            this.font.draw(context, "DONT CHEAT ASSHOLE", 100, 920);
+            this.font.draw(context, "PLEASE DONT CHEAT", 100, 920);
             //this.font.draw(context, "SCORE: " + fin.value, 100, 920);
         } else {
             this.font.draw(context, "SCORE: " + fin.value, 100, 920);
